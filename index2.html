@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clevertap</title>
+    <!-- Notification Push javascript file -->
+   <!--<script src="/notificationPush.js"></script>-->
+    <script type="text/javascript">
+      var clevertap = {
+        event: [],
+        profile: [],
+        account: [],
+        onUserLogin: [],
+        notifications: [],
+        privacy: [],
+      };
+      // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
+      clevertap.account.push({ id: "R9K-Z94-R46Z" });
+      clevertap.privacy.push({ useIP: true }); 
+      clevertap.privacy.push({ optOut: false }); //set the flag to true, if the user of the device opts out of sharing their data
+      
+      (function () {
+        var wzrk = document.createElement("script");
+        wzrk.type = "text/javascript";
+        wzrk.async = true;
+       wzrk.src = 'https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.min.js';
+      // wzrk.src = ('https:' == document.location.protocol ? 'https://d2r1yp2w7bby2u.cloudfront.net' : 'http://static.clevertap.com') + '/js/a.js';
+		
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(wzrk, s);
+      })();
+    </script>
+     <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyChlhP7tcvKskJnQ3nl0vtK4J3hMtNzwyc",
+        authDomain: "clevertapintegrationsample.firebaseapp.com",
+        projectId: "clevertapintegrationsample",
+        storageBucket: "clevertapintegrationsample.appspot.com",
+        messagingSenderId: "519353663319",
+        appId: "1:519353663319:web:c78a84f835f4e08a050812",
+        measurementId: "G-N2D1J8H8TM"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+
+    <link rel="manifest" href="/manifest.json" />
+
+    <style>
+      #nativeDisplayContainer {
+          height: 100vh;
+          width: 100vw;
+          font-size: 20px;
+          margin: 0px;
+          
+      }
+  </style>
+  </head>
+  <body>
+       
+    <h1>Web SDK Integration Test!</h1>
+    <!-- onUserLogin -->
+   
+    <!-- event -->
+     <div id="button-container">
+    <button id="event" onclick="pushEvent()">Push Event</button> <br><br>
+    <button id="login" onclick="onuserlogin()">OnUserLogin</button><br><br>
+    <button id="webpopup" onclick="webpopupEvent()">webpopup event</button><br><br>
+    <button id="box default webpopup" onclick="boxwebpopupEvent()">box default webpopup event</button><br><br>
+    <button id="custom box webpopup" onclick="customboxwebpopupEvent()">custom box webpopup event</button><br><br>
+    <button id="custom html info popup" onclick="customsurveyinfowebpopupEvent()">custom html info popup</button><br><br>
+    <button id="ipfalse" onclick="ipfalse()">IP FALSE</button><br><br>
+    <button id="iptrue" onclick="iptrue()">IP TRUE</button><br><br>
+    <button id="login" onclick="profilepush()">ProfilePush</button><br><br>
+    <button id="loc" onclick="pushnotif()">Send Notification</button><br><br>
+    <button id="ctid" onclick="showctid()">Show CT ID </button><br><br>
+    <button id="ctid" onclick="clear()">Clear CT ID </button><br><br>
+    <button id="webnativedisplay1" onclick="webNativeDisplayEvent1()">Web Native Display1</button><br><br>
+    <h2 id="test"> </h2>
+    <!-- <div id="webnativedisplay1"> </div> -->
+    <div id="nativeDisplayContainer"></div>
+
+     </div>
+    <script>
+      
+    //   setTimeout(function() {
+    //     let confirmAction = confirm("Are you sure to share your location?");
+    //     if (confirmAction) {
+
+    //        clevertap.event.push("useIP pop: true "); 
+    //        clevertap.privacy.push({ useIP: true }); 
+    //       console.log("useIP: true ");
+    //     } else {
+    //         clevertap.event.push("useIP: pop false "); 
+    //       console.log("useIP: false ");
+    //     }
+    // //clevertap.event.push("HOME PAGE");
+    // }, 3000);
+
+     
+      let pushEvent = () => {
+        clevertap.event.push("ProductViewed");
+      };
+
+      let webpopupEvent = () => {
+        clevertap.event.push("web popup event");
+      };
+
+      let boxwebpopupEvent = () => {
+        clevertap.event.push("box web popup event");
+      };
+
+      let customboxwebpopupEvent = () => {
+        clevertap.event.push("custom box web popup event");
+      };
+
+       let customsurveyinfowebpopupEvent = () => {
+        clevertap.event.push("custom survey info web popup event");
+      };
+
+      let ipfalse = () => {
+        
+        clevertap.privacy.push({ useIP: false }); 
+        clevertap.event.push("useIP: false ");
+   
+        
+      };
+      let iptrue = () => {
+        clevertap.privacy.push({ useIP: true }); 
+        clevertap.event.push("useIP: true ");
+
+      };
+
+      let onuserlogin = () => {
+        clevertap.onUserLogin.push({
+    "Site": {
+      "Name": "Aayush web",
+      "Identity": 123456,
+      "Email": "aayushweb@yopmail.com",
+      "Gender": "M",
+      "DOB": new Date(),
+      "MSG-email": true,
+      "MSG-push": true,
+      "MSG-sms": true,
+      "MSG-whatsapp": true,
+    },
+  });
+      };
+
+      let showctid = () => {
+        var ctid = clevertap.getCleverTapID();
+				document.getElementById("test").innerHTML = ctid;
+      };
+
+      let clear = () => {
+        clevertap.clear();
+      };
+      let webNativeDisplayEvent1 = () => {
+        clevertap.event.push("web native trigger");
+      };
+    </script>
+    <!-- key/value events -->
+    <!-- profile push  -->
+   
+    
+    <!-- <script src="/clevertap_sw.js"></script> -->
+    <!-- send notification event -->
+    <br /><br />
+    
+  
+    <script>
+      let pushnotif = () => {
+        clevertap.notifications.push({
+    titleText: "Would you like to receive Notification?",
+    bodyText: "Will send you only trusted notifications and updates",
+    okButtonText: "OK",
+    rejectButtonText: "Cancel",
+    okButtonColor: "#F28046",
+  });
+//   navigator.geolocation.getCurrentPosition(function(position) {
+//     let lat = position.coords.latitude;
+//     let long = position.coords.longitude;
+//     console.log(lat,long);
+//     clevertap.event.push(lat);
+//     clevertap.event.push("LOCATION", {
+//   "LAT":lat,
+//   "LONG":long,
+//   "Date": new Date()
+// });
+//   clevertap.profile.push({
+//     "Site": {
+//       "Latitude": lat,
+//       "Longitude": long,
+//     },
+  
+// });
+
+  //});
+      };
+    </script>
+    
+  </body>
+</html>

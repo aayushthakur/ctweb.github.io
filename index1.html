@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUXE — Premium Fashion</title>
+
+  <!-- CleverTap -->
+  <script type="text/javascript">
+    var clevertap = { event: [], profile: [], account: [], onUserLogin: [], notifications: [], privacy: [] };
+    clevertap.account.push({ id: "R9K-Z94-R46Z" });
+    clevertap.privacy.push({ useIP: true });
+    clevertap.privacy.push({ optOut: false });
+    (function () {
+      var wzrk = document.createElement("script");
+      wzrk.type = "text/javascript";
+      wzrk.async = true;
+      wzrk.src = 'https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.min.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(wzrk, s);
+    })();
+  </script>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-analytics.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyChlhP7tcvKskJnQ3nl0vtK4J3hMtNzwyc",
+      authDomain: "clevertapintegrationsample.firebaseapp.com",
+      projectId: "clevertapintegrationsample",
+      storageBucket: "clevertapintegrationsample.appspot.com",
+      messagingSenderId: "519353663319",
+      appId: "1:519353663319:web:c78a84f835f4e08a050812",
+      measurementId: "G-N2D1J8H8TM"
+    };
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0d0c;
+      --bg2: #161513;
+      --bg3: #1e1c19;
+      --gold: #c9a84c;
+      --gold-light: #e8c96d;
+      --gold-dim: #8a6e2f;
+      --cream: #f5f0e8;
+      --muted: #6b6760;
+      --border: rgba(201,168,76,0.18);
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(14,13,12,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+      opacity: 0.75;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
+    .nav-actions { display: flex; gap: 1rem; align-items: center; }
+    .btn-cart {
+      background: var(--gold);
+      color: var(--bg);
+      border: none;
+      padding: 0.55rem 1.4rem;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-cart:hover { background: var(--gold-light); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 3rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,168,76,0.07) 0%, transparent 60%),
+        linear-gradient(160deg, #0e0d0c 0%, #1a1710 50%, #0e0d0c 100%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image: repeating-linear-gradient(0deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 80px),
+                        repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 80px);
+    }
+    .hero-content { position: relative; max-width: 700px; }
+    .hero-eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem; opacity: 0.9;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 9vw, 8rem);
+      font-weight: 300;
+      line-height: 0.92;
+      color: var(--cream);
+      margin-bottom: 2rem;
+    }
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-sub {
+      font-size: 0.9rem; color: rgba(245,240,232,0.55); line-height: 1.8;
+      max-width: 420px; margin-bottom: 3rem;
+    }
+    .hero-cta {
+      display: inline-flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--gold); color: var(--bg);
+      border: none; padding: 1rem 2.5rem;
+      font-family: var(--font-body);
+      font-size: 0.72rem; letter-spacing: 0.22em;
+      text-transform: uppercase; cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--cream);
+      border: 1px solid rgba(245,240,232,0.3);
+      padding: 1rem 2.5rem;
+      font-family: var(--font-body);
+      font-size: 0.72rem; letter-spacing: 0.22em;
+      text-transform: uppercase; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-stats {
+      position: absolute; right: 3rem; bottom: 6rem;
+      display: flex; gap: 3rem;
+    }
+    .stat { text-align: right; }
+    .stat-num {
+      font-family: var(--font-display); font-size: 2.5rem;
+      font-weight: 300; color: var(--gold); line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.65rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ─── MARQUEE STRIP ─── */
+    .marquee-strip {
+      background: var(--gold);
+      overflow: hidden;
+      padding: 0.75rem 0;
+    }
+    .marquee-track {
+      display: flex; gap: 0;
+      animation: marquee 20s linear infinite;
+      width: max-content;
+    }
+    .marquee-item {
+      font-size: 0.65rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--bg);
+      font-weight: 500; padding: 0 3rem;
+      white-space: nowrap;
+    }
+    .marquee-dot { color: var(--bg2); }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ─── SECTION SHARED ─── */
+    section { padding: 7rem 3rem; }
+    .section-header { margin-bottom: 4rem; }
+    .section-label {
+      font-size: 0.65rem; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300; line-height: 1.05; color: var(--cream);
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+
+    /* ─── COLLECTIONS GRID ─── */
+    .collections { background: var(--bg2); }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .product-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .product-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .product-img {
+      width: 100%; aspect-ratio: 3/4;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .product-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem;
+    }
+    .product-icon {
+      font-family: var(--font-display);
+      font-size: 5rem; color: var(--gold-dim); opacity: 0.4;
+      font-style: italic;
+    }
+    .product-tag {
+      position: absolute; top: 1rem; left: 1rem;
+      background: var(--gold); color: var(--bg);
+      font-size: 0.6rem; letter-spacing: 0.2em;
+      text-transform: uppercase; padding: 0.3rem 0.7rem;
+      font-weight: 500;
+    }
+    .product-info { padding: 1.25rem 1.5rem; }
+    .product-brand {
+      font-size: 0.6rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem;
+    }
+    .product-name {
+      font-family: var(--font-display); font-size: 1.3rem;
+      font-weight: 400; color: var(--cream); margin-bottom: 0.75rem;
+    }
+    .product-footer { display: flex; justify-content: space-between; align-items: center; }
+    .product-price {
+      font-family: var(--font-display); font-size: 1.4rem;
+      color: var(--gold); font-weight: 300;
+    }
+    .btn-add {
+      background: transparent; border: 1px solid var(--border);
+      color: var(--cream); font-family: var(--font-body);
+      font-size: 0.65rem; letter-spacing: 0.18em;
+      text-transform: uppercase; padding: 0.5rem 1rem;
+      cursor: pointer; transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-add:hover { background: var(--gold); border-color: var(--gold); color: var(--bg); }
+
+    /* ─── BANNER SECTION ─── */
+    .editorial-banner {
+      background: var(--bg3);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
+      overflow: hidden;
+    }
+    .banner-visual {
+      background:
+        radial-gradient(ellipse 60% 80% at 40% 60%, rgba(201,168,76,0.12) 0%, transparent 70%),
+        var(--bg3);
+      display: flex; align-items: center; justify-content: center;
+      border-right: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .banner-ornament {
+      font-family: var(--font-display);
+      font-size: 18rem; font-weight: 300;
+      color: var(--gold); opacity: 0.05;
+      position: absolute; line-height: 1;
+      font-style: italic; user-select: none;
+    }
+    .banner-circle {
+      width: 220px; height: 220px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .banner-circle-inner {
+      width: 160px; height: 160px;
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .banner-circle-text {
+      font-family: var(--font-display); font-size: 1.2rem;
+      font-style: italic; color: var(--gold); text-align: center; line-height: 1.4;
+    }
+    .banner-content {
+      padding: 4rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .banner-season {
+      font-size: 0.65rem; letter-spacing: 0.4em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 2rem;
+    }
+    .banner-title {
+      font-family: var(--font-display);
+      font-size: 3.5rem; font-weight: 300;
+      line-height: 1; color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+    .banner-title em { font-style: italic; color: var(--gold); }
+    .banner-desc {
+      font-size: 0.875rem; color: rgba(245,240,232,0.5);
+      line-height: 1.8; margin-bottom: 2.5rem;
+      max-width: 360px;
+    }
+    .banner-price-row { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; }
+    .banner-price { font-family: var(--font-display); font-size: 2.5rem; color: var(--gold); }
+    .banner-was { font-size: 0.85rem; color: var(--muted); text-decoration: line-through; }
+
+    /* ─── CATEGORIES ─── */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+    .category-cell {
+      background: var(--bg);
+      padding: 3rem 2.5rem;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      min-height: 220px;
+      cursor: pointer;
+      transition: background 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .category-cell:hover { background: var(--bg3); }
+    .category-cell:hover .cat-arrow { transform: translateX(6px); color: var(--gold); }
+    .cat-num {
+      font-family: var(--font-display); font-size: 4rem;
+      font-weight: 300; color: var(--gold-dim); opacity: 0.35; line-height: 1;
+    }
+    .cat-name {
+      font-family: var(--font-display); font-size: 1.75rem;
+      font-weight: 300; color: var(--cream); margin-top: 1rem;
+    }
+    .cat-count { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.15em; margin-top: 0.4rem; }
+    .cat-arrow {
+      font-size: 1.2rem; color: var(--muted);
+      transition: transform 0.25s, color 0.25s;
+      align-self: flex-end; margin-top: 1rem;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials { background: var(--bg2); }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .testimonial-card {
+      border: 1px solid var(--border); padding: 2rem;
+      background: var(--bg3);
+    }
+    .stars { color: var(--gold); font-size: 0.75rem; letter-spacing: 0.2em; margin-bottom: 1.25rem; }
+    .testimonial-quote {
+      font-family: var(--font-display); font-size: 1.05rem;
+      font-style: italic; line-height: 1.7; color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+    .author-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--gold-dim); display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 1rem; color: var(--bg);
+    }
+    .author-name { font-size: 0.8rem; color: var(--cream); font-weight: 500; }
+    .author-loc { font-size: 0.7rem; color: var(--muted); }
+
+    /* ─── NEWSLETTER ─── */
+    .newsletter {
+      text-align: center;
+      padding: 7rem 3rem;
+      background: var(--bg3);
+      border-top: 1px solid var(--border);
+    }
+    .newsletter-title {
+      font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300; color: var(--cream); margin-bottom: 1rem;
+    }
+    .newsletter-title em { font-style: italic; color: var(--gold); }
+    .newsletter-sub {
+      font-size: 0.875rem; color: rgba(245,240,232,0.5); margin-bottom: 2.5rem;
+    }
+    .newsletter-form { display: flex; justify-content: center; gap: 0; max-width: 480px; margin: 0 auto; }
+    .newsletter-input {
+      flex: 1; background: var(--bg);
+      border: 1px solid var(--border); border-right: none;
+      padding: 0.9rem 1.25rem; color: var(--cream);
+      font-family: var(--font-body); font-size: 0.85rem;
+      outline: none;
+    }
+    .newsletter-input::placeholder { color: var(--muted); }
+    .newsletter-input:focus { border-color: var(--gold); }
+    .btn-subscribe {
+      background: var(--gold); color: var(--bg);
+      border: 1px solid var(--gold); padding: 0.9rem 1.8rem;
+      font-family: var(--font-body);
+      font-size: 0.7rem; letter-spacing: 0.2em;
+      text-transform: uppercase; cursor: pointer;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .btn-subscribe:hover { background: var(--gold-light); }
+
+    /* ─── CLEVERTAP LAB ─── */
+    .ct-lab {
+      padding: 5rem 3rem 6rem;
+      background: #0a0908;
+      border-top: 1px solid var(--border);
+    }
+    .ct-lab-header { margin-bottom: 3rem; }
+    .ct-lab-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(201,168,76,0.1); border: 1px solid var(--border);
+      padding: 0.35rem 0.9rem; margin-bottom: 1.5rem;
+    }
+    .ct-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--gold);
+      animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+    }
+    .ct-badge-text {
+      font-size: 0.65rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold); font-weight: 500;
+    }
+    .ct-lab-title {
+      font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300; color: var(--cream); margin-bottom: 0.75rem;
+    }
+    .ct-lab-desc {
+      font-size: 0.85rem; color: var(--muted); line-height: 1.7;
+    }
+
+    .ct-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .ct-group {
+      background: var(--bg3); border: 1px solid var(--border);
+      padding: 1.5rem;
+    }
+    .ct-group-title {
+      font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .ct-buttons { display: flex; flex-direction: column; gap: 0.6rem; }
+    .ct-btn {
+      background: var(--bg2); border: 1px solid var(--border);
+      color: var(--cream); padding: 0.65rem 1rem;
+      font-family: var(--font-body); font-size: 0.75rem;
+      letter-spacing: 0.08em; text-align: left; cursor: pointer;
+      display: flex; align-items: center; gap: 0.6rem;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+    }
+    .ct-btn:hover { border-color: var(--gold); background: rgba(201,168,76,0.07); color: var(--gold); }
+    .ct-btn:active { transform: scale(0.99); }
+    .ct-btn-icon { font-size: 0.75rem; opacity: 0.6; width: 14px; text-align: center; }
+
+    .ct-output-box {
+      margin-top: 2.5rem;
+      background: var(--bg3); border: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+    }
+    .ct-output-title {
+      font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+    #ct-log {
+      font-family: 'Courier New', monospace; font-size: 0.78rem;
+      color: rgba(245,240,232,0.55); line-height: 1.8;
+      min-height: 80px; max-height: 200px; overflow-y: auto;
+    }
+    #ct-id-display {
+      font-family: var(--font-display); font-size: 1.5rem;
+      color: var(--gold); margin-top: 0.5rem; letter-spacing: 0.05em;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg); border-top: 1px solid var(--border);
+      padding: 4rem 3rem 2rem;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 3rem;
+    }
+    .footer-brand { }
+    .footer-logo {
+      font-family: var(--font-display); font-size: 2rem;
+      color: var(--gold); letter-spacing: 0.3em; font-weight: 300;
+      margin-bottom: 1rem;
+    }
+    .footer-tagline { font-size: 0.8rem; color: var(--muted); line-height: 1.7; max-width: 240px; }
+    .footer-col-title {
+      font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.25rem;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--cream); }
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding-top: 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-copy { font-size: 0.72rem; color: var(--muted); }
+
+    /* ─── TOAST ─── */
+    .toast-container {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 9999;
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .toast {
+      background: var(--bg3); border: 1px solid var(--gold);
+      padding: 0.85rem 1.25rem; max-width: 320px;
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      animation: slide-in 0.3s ease;
+    }
+    .toast-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); margin-top: 5px; flex-shrink: 0; }
+    .toast-body { font-size: 0.78rem; line-height: 1.6; color: var(--cream); }
+    .toast-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.2rem; }
+    @keyframes slide-in { from { transform: translateX(40px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes slide-out { from { opacity: 1; } to { opacity: 0; transform: translateX(20px); } }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 5rem 1.5rem; }
+      .hero { padding: 0 1.5rem 5rem; }
+      .hero-stats { position: static; flex-direction: row; margin-top: 3rem; }
+      .editorial-banner { grid-template-columns: 1fr; }
+      .banner-visual { display: none; }
+      .categories-grid { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .ct-lab { padding: 4rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Luxe</div>
+  <ul class="nav-links">
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#editorial">Editorial</a></li>
+    <li><a href="#categories">Categories</a></li>
+    <li><a href="#ct-lab">CT Lab</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-cart" onclick="trackEvent('Cart Opened')">Bag (0)</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">SS 2025 Collection — Now Available</div>
+    <h1 class="hero-title">Wear the<br><em>Extraordinary</em></h1>
+    <p class="hero-sub">Curated luxury for the discerning few. Every piece tells a story of uncompromising craftsmanship and timeless elegance.</p>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="trackEvent('Shop Now Clicked')">Shop the Collection</button>
+      <button class="btn-outline" onclick="trackEvent('Lookbook Viewed')">View Lookbook</button>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">240+</div>
+      <div class="stat-label">Pieces</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">18</div>
+      <div class="stat-label">Designers</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">97%</div>
+      <div class="stat-label">Satisfaction</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track" id="marquee">
+    <span class="marquee-item">Free shipping on orders over ₹5,000</span>
+    <span class="marquee-item marquee-dot">✦</span>
+    <span class="marquee-item">New arrivals every Monday</span>
+    <span class="marquee-item marquee-dot">✦</span>
+    <span class="marquee-item">Exclusive member benefits</span>
+    <span class="marquee-item marquee-dot">✦</span>
+    <span class="marquee-item">Authenticated luxury, always</span>
+    <span class="marquee-item marquee-dot">✦</span>
+    <span class="marquee-item">Free shipping on orders over ₹5,000</span>
+    <span class="marquee-item marquee-dot">✦</span>
+    <span class="marquee-item">New arrivals every Monday</span>
+    <span class="marquee-item marquee-dot">✦</span>
+    <span class="marquee-item">Exclusive member benefits</span>
+    <span class="marquee-item marquee-dot">✦</span>
+    <span class="marquee-item">Authenticated luxury, always</span>
+    <span class="marquee-item marquee-dot">✦</span>
+  </div>
+</div>
+
+<!-- COLLECTIONS -->
+<section class="collections" id="collections">
+  <div class="section-header">
+    <div class="section-label">Curated Selection</div>
+    <h2 class="section-title">New <em>Arrivals</em></h2>
+  </div>
+  <div class="products-grid">
+    <div class="product-card" onclick="trackProductView('Silk Blazer', '₹18,500')">
+      <div class="product-img" style="background: #1a1714;">
+        <div class="product-placeholder">
+          <div class="product-icon">B</div>
+        </div>
+        <div class="product-tag">New</div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Maison Luxe</div>
+        <div class="product-name">Silk Blazer</div>
+        <div class="product-footer">
+          <div class="product-price">₹18,500</div>
+          <button class="btn-add" onclick="event.stopPropagation(); trackAddToCart('Silk Blazer')">Add to bag</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" onclick="trackProductView('Cashmere Coat', '₹34,000')">
+      <div class="product-img" style="background: #171a19;">
+        <div class="product-placeholder">
+          <div class="product-icon">C</div>
+        </div>
+        <div class="product-tag" style="background:#1a1714; color:var(--gold); border:1px solid var(--gold);">Limited</div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Atelier Nord</div>
+        <div class="product-name">Cashmere Coat</div>
+        <div class="product-footer">
+          <div class="product-price">₹34,000</div>
+          <button class="btn-add" onclick="event.stopPropagation(); trackAddToCart('Cashmere Coat')">Add to bag</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" onclick="trackProductView('Leather Trousers', '₹12,200')">
+      <div class="product-img" style="background: #161616;">
+        <div class="product-placeholder">
+          <div class="product-icon">T</div>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Studio Noir</div>
+        <div class="product-name">Leather Trousers</div>
+        <div class="product-footer">
+          <div class="product-price">₹12,200</div>
+          <button class="btn-add" onclick="event.stopPropagation(); trackAddToCart('Leather Trousers')">Add to bag</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" onclick="trackProductView('Linen Dress', '₹9,800')">
+      <div class="product-img" style="background: #1c1a16;">
+        <div class="product-placeholder">
+          <div class="product-icon">D</div>
+        </div>
+        <div class="product-tag">Sale</div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Reverie</div>
+        <div class="product-name">Linen Dress</div>
+        <div class="product-footer">
+          <div class="product-price">₹9,800</div>
+          <button class="btn-add" onclick="event.stopPropagation(); trackAddToCart('Linen Dress')">Add to bag</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDITORIAL BANNER -->
+<div class="editorial-banner" id="editorial">
+  <div class="banner-visual">
+    <div class="banner-ornament">L</div>
+    <div class="banner-circle">
+      <div class="banner-circle-inner">
+        <div class="banner-circle-text">The<br>Edit</div>
+      </div>
+    </div>
+  </div>
+  <div class="banner-content">
+    <div class="banner-season">Summer 2025 — Editor's Pick</div>
+    <h2 class="banner-title">The Art of<br><em>Slow Fashion</em></h2>
+    <p class="banner-desc">A hand-picked selection of pieces designed to last generations. Invest in pieces that transcend seasonal trends and become lifelong companions.</p>
+    <div class="banner-price-row">
+      <div class="banner-price">₹6,500</div>
+      <div class="banner-was">₹11,000</div>
+    </div>
+    <button class="btn-primary" onclick="trackEvent('Editorial CTA Clicked')">Explore the Edit</button>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section style="padding: 0; background: var(--bg);" id="categories">
+  <div style="padding: 5rem 3rem 2rem;">
+    <div class="section-label">Browse by</div>
+    <h2 class="section-title" style="font-size: clamp(2rem,4vw,3.5rem);">All <em>Categories</em></h2>
+  </div>
+  <div class="categories-grid">
+    <div class="category-cell" onclick="trackEvent('Category Viewed', {category: 'Womenswear'})">
+      <div><div class="cat-num">01</div><div class="cat-name">Womenswear</div><div class="cat-count">128 pieces</div></div>
+      <div class="cat-arrow">→</div>
+    </div>
+    <div class="category-cell" onclick="trackEvent('Category Viewed', {category: 'Menswear'})">
+      <div><div class="cat-num">02</div><div class="cat-name">Menswear</div><div class="cat-count">94 pieces</div></div>
+      <div class="cat-arrow">→</div>
+    </div>
+    <div class="category-cell" onclick="trackEvent('Category Viewed', {category: 'Accessories'})">
+      <div><div class="cat-num">03</div><div class="cat-name">Accessories</div><div class="cat-count">56 pieces</div></div>
+      <div class="cat-arrow">→</div>
+    </div>
+    <div class="category-cell" onclick="trackEvent('Category Viewed', {category: 'Footwear'})">
+      <div><div class="cat-num">04</div><div class="cat-name">Footwear</div><div class="cat-count">41 pieces</div></div>
+      <div class="cat-arrow">→</div>
+    </div>
+    <div class="category-cell" onclick="trackEvent('Category Viewed', {category: 'Jewellery'})">
+      <div><div class="cat-num">05</div><div class="cat-name">Jewellery</div><div class="cat-count">33 pieces</div></div>
+      <div class="cat-arrow">→</div>
+    </div>
+    <div class="category-cell" onclick="trackEvent('Category Viewed', {category: 'Home'})">
+      <div><div class="cat-num">06</div><div class="cat-name">Home & Living</div><div class="cat-count">22 pieces</div></div>
+      <div class="cat-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-header">
+    <div class="section-label">Client Stories</div>
+    <h2 class="section-title">What They <em>Say</em></h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-quote">"The cashmere coat arrived beautifully wrapped. The quality is extraordinary — I've never worn anything that felt so luxurious."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">P</div>
+        <div><div class="author-name">Priya Mehta</div><div class="author-loc">Mumbai</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-quote">"LUXE has completely changed how I think about my wardrobe. Every piece I've purchased has become a staple."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">A</div>
+        <div><div class="author-name">Arjun Sharma</div><div class="author-loc">Delhi</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-quote">"The curation here is unmatched. I trust every recommendation. It's the only place I shop for important occasions."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">S</div>
+        <div><div class="author-name">Simran Kaur</div><div class="author-loc">Bangalore</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <h2 class="newsletter-title">Join the <em>Inner Circle</em></h2>
+  <p class="newsletter-sub">Private sale access, editorial drops, and invitations to exclusive events.</p>
+  <div class="newsletter-form">
+    <input type="email" class="newsletter-input" placeholder="your@email.com" id="newsletter-email">
+    <button class="btn-subscribe" onclick="trackNewsletterSignup()">Subscribe</button>
+  </div>
+</div>
+
+<!-- ─── CLEVERTAP TESTING LAB ─── -->
+<section class="ct-lab" id="ct-lab">
+  <div class="ct-lab-header">
+    <div class="ct-lab-badge"><div class="ct-dot"></div><span class="ct-badge-text">Developer Tools</span></div>
+    <h2 class="ct-lab-title">CleverTap Testing Lab</h2>
+    <p class="ct-lab-desc">Trigger CleverTap events, simulate user actions, and test SDK integrations from this panel.</p>
+  </div>
+
+  <div class="ct-grid">
+
+    <!-- Events -->
+    <div class="ct-group">
+      <div class="ct-group-title">Events</div>
+      <div class="ct-buttons">
+        <button class="ct-btn" onclick="ctPushEvent()"><span class="ct-btn-icon">⚡</span>Push ProductViewed event</button>
+        <button class="ct-btn" onclick="ctWebpopup()"><span class="ct-btn-icon">⚡</span>Web popup event</button>
+        <button class="ct-btn" onclick="ctBoxWebpopup()"><span class="ct-btn-icon">⚡</span>Box default web popup</button>
+        <button class="ct-btn" onclick="ctCustomBoxWebpopup()"><span class="ct-btn-icon">⚡</span>Custom box web popup</button>
+        <button class="ct-btn" onclick="ctCustomSurvey()"><span class="ct-btn-icon">⚡</span>Custom HTML info popup</button>
+        <button class="ct-btn" onclick="ctWebNativeDisplay()"><span class="ct-btn-icon">⚡</span>Web native display</button>
+      </div>
+    </div>
+
+    <!-- User -->
+    <div class="ct-group">
+      <div class="ct-group-title">User Identity</div>
+      <div class="ct-buttons">
+        <button class="ct-btn" onclick="ctOnUserLogin()"><span class="ct-btn-icon">◎</span>OnUserLogin</button>
+        <button class="ct-btn" onclick="ctProfilePush()"><span class="ct-btn-icon">◎</span>Profile push</button>
+        <button class="ct-btn" onclick="ctShowId()"><span class="ct-btn-icon">◎</span>Get CleverTap ID</button>
+        <button class="ct-btn" onclick="ctClear()"><span class="ct-btn-icon">◎</span>Clear CleverTap ID</button>
+      </div>
+    </div>
+
+    <!-- Privacy & Notifications -->
+    <div class="ct-group">
+      <div class="ct-group-title">Privacy &amp; Notifications</div>
+      <div class="ct-buttons">
+        <button class="ct-btn" onclick="ctIPTrue()"><span class="ct-btn-icon">◉</span>Set IP tracking: true</button>
+        <button class="ct-btn" onclick="ctIPFalse()"><span class="ct-btn-icon">◎</span>Set IP tracking: false</button>
+        <button class="ct-btn" onclick="ctSendNotification()"><span class="ct-btn-icon">▲</span>Request push notification</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Output -->
+  <div class="ct-output-box">
+    <div class="ct-output-title">Console Output</div>
+    <div id="ct-log">Waiting for events…</div>
+    <div id="ct-id-display"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">Luxe</div>
+      <p class="footer-tagline">Curated luxury fashion for those who believe that what you wear should say something worth hearing.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Shop</div>
+      <ul class="footer-links">
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Womenswear</a></li>
+        <li><a href="#">Menswear</a></li>
+        <li><a href="#">Accessories</a></li>
+        <li><a href="#">Sale</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Support</div>
+      <ul class="footer-links">
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Shipping</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Size Guide</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 LUXE. All rights reserved.</span>
+    <span class="footer-copy">Privacy Policy · Terms of Service</span>
+  </div>
+</footer>
+
+<!-- Toast container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Native display container -->
+<div id="nativeDisplayContainer"></div>
+
+<script>
+  // ─── TOAST SYSTEM ───
+  function showToast(label, message) {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `<div class="toast-dot"></div><div class="toast-body"><div class="toast-label">${label}</div>${message}</div>`;
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.style.animation = 'slide-out 0.3s ease forwards';
+      setTimeout(() => toast.remove(), 300);
+    }, 3500);
+  }
+
+  function ctLog(msg) {
+    const el = document.getElementById('ct-log');
+    const time = new Date().toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+    el.innerHTML = `<span style="color:var(--gold-dim)">[${time}]</span> ${msg}<br>` + el.innerHTML;
+  }
+
+  // ─── COMMERCE HELPERS ───
+  function trackEvent(name, props) {
+    clevertap.event.push(name, props || {});
+    showToast('Event Fired', name);
+    ctLog(`Event: ${name}`);
+  }
+
+  function trackProductView(name, price) {
+    clevertap.event.push("ProductViewed", { Name: name, Price: price });
+    showToast('Product Viewed', name);
+    ctLog(`ProductViewed — ${name} @ ${price}`);
+  }
+
+  function trackAddToCart(name) {
+    clevertap.event.push("AddedToCart", { Name: name });
+    showToast('Added to Cart', name);
+    ctLog(`AddedToCart — ${name}`);
+  }
+
+  function trackNewsletterSignup() {
+    const email = document.getElementById('newsletter-email').value;
+    if (!email) return;
+    clevertap.event.push("Newsletter Signup", { Email: email });
+    showToast('Subscribed', 'Welcome to the inner circle');
+    ctLog(`Newsletter Signup — ${email}`);
+  }
+
+  // ─── CLEVERTAP LAB ───
+  function ctPushEvent() {
+    clevertap.event.push("ProductViewed");
+    ctLog('Pushed: ProductViewed');
+    showToast('CT Event', 'ProductViewed fired');
+  }
+
+  function ctWebpopup() {
+    clevertap.event.push("web popup event");
+    ctLog('Pushed: web popup event');
+    showToast('CT Event', 'web popup event');
+  }
+
+  function ctBoxWebpopup() {
+    clevertap.event.push("box web popup event");
+    ctLog('Pushed: box web popup event');
+    showToast('CT Event', 'box web popup event');
+  }
+
+  function ctCustomBoxWebpopup() {
+    clevertap.event.push("custom box web popup event");
+    ctLog('Pushed: custom box web popup event');
+    showToast('CT Event', 'custom box web popup event');
+  }
+
+  function ctCustomSurvey() {
+    clevertap.event.push("custom survey info web popup event");
+    ctLog('Pushed: custom survey info web popup event');
+    showToast('CT Event', 'custom html info popup');
+  }
+
+  function ctWebNativeDisplay() {
+    clevertap.event.push("web native trigger");
+    ctLog('Pushed: web native trigger');
+    showToast('CT Event', 'Web native display triggered');
+  }
+
+  function ctOnUserLogin() {
+    clevertap.onUserLogin.push({
+      "Site": {
+        "Name": "Aayush web",
+        "Identity": 123456,
+        "Email": "aayushweb@yopmail.com",
+        "Gender": "M",
+        "DOB": new Date(),
+        "MSG-email": true,
+        "MSG-push": true,
+        "MSG-sms": true,
+        "MSG-whatsapp": true
+      }
+    });
+    ctLog('onUserLogin pushed — Identity: 123456, Email: aayushweb@yopmail.com');
+    showToast('User Login', 'Aayush Web logged in');
+  }
+
+  function ctProfilePush() {
+    clevertap.profile.push({
+      "Site": {
+        "Name": "Aayush web",
+        "Email": "aayushweb@yopmail.com"
+      }
+    });
+    ctLog('Profile pushed');
+    showToast('Profile Push', 'Profile data sent');
+  }
+
+  function ctShowId() {
+    var ctid = clevertap.getCleverTapID();
+    document.getElementById('ct-id-display').textContent = ctid || '—';
+    ctLog(`CleverTap ID: ${ctid}`);
+    showToast('CT ID', ctid || 'Not available yet');
+  }
+
+  function ctClear() {
+    clevertap.clear();
+    document.getElementById('ct-id-display').textContent = '';
+    ctLog('CleverTap session cleared');
+    showToast('Cleared', 'CleverTap session reset');
+  }
+
+  function ctIPTrue() {
+    clevertap.privacy.push({ useIP: true });
+    clevertap.event.push("useIP: true ");
+    ctLog('IP tracking: enabled');
+    showToast('Privacy', 'IP tracking set to TRUE');
+  }
+
+  function ctIPFalse() {
+    clevertap.privacy.push({ useIP: false });
+    clevertap.event.push("useIP: false ");
+    ctLog('IP tracking: disabled');
+    showToast('Privacy', 'IP tracking set to FALSE');
+  }
+
+  function ctSendNotification() {
+    clevertap.notifications.push({
+      titleText: "Would you like to receive Notifications?",
+      bodyText: "We'll send you only trusted updates and offers.",
+      okButtonText: "Allow",
+      rejectButtonText: "Not now",
+      okButtonColor: "#c9a84c",
+    });
+    ctLog('Notification prompt triggered');
+    showToast('Notifications', 'Push permission prompt shown');
+  }
+</script>
+
+</body>
+</html>
