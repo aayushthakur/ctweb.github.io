@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,9 +16,22 @@
       var wzrk = document.createElement("script");
       wzrk.type = "text/javascript"; wzrk.async = true;
       wzrk.src = 'https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.min.js';
+
+      wzrk.onload = function () {
+        console.log("CleverTap SDK Loaded");
+
+        // wait briefly for SDK init
+        setTimeout(function () {
+          if (typeof productExperiences === "function") {
+            productExperiences();
+          }
+        }, 1000);
+      };
+
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(wzrk, s);
     })();
+
   </script>
 
   <!-- Firebase -->
@@ -37,10 +51,19 @@
   </script>
 
   <link rel="manifest" href="/manifest.json" />
-  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap"
+    rel="stylesheet">
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     :root {
       --pink: #ff3f6c;
       --pink-light: #fff0f3;
@@ -55,61 +78,138 @@
       --orange: #ff905a;
       --font: 'Assistant', sans-serif;
     }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 14px; }
-    a { text-decoration: none; color: inherit; }
-    button { cursor: pointer; font-family: var(--font); }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 14px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: var(--font);
+    }
 
     /* TOP BAR */
     .top-bar {
-      background: var(--text); color: #fff;
-      text-align: center; padding: 7px 0;
-      font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
+      background: var(--text);
+      color: #fff;
+      text-align: center;
+      padding: 7px 0;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
     }
-    .top-bar span { color: #ffd700; margin: 0 4px; }
+
+    .top-bar span {
+      color: #ffd700;
+      margin: 0 4px;
+    }
 
     /* HEADER */
     header {
-      position: sticky; top: 0; z-index: 200;
+      position: sticky;
+      top: 0;
+      z-index: 200;
       background: var(--white);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
     }
+
     .header-main {
-      display: flex; align-items: center; gap: 16px;
-      max-width: 1380px; margin: 0 auto;
-      padding: 0 20px; height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 0 20px;
+      height: 64px;
     }
+
     .logo {
       font-family: 'Playfair Display', serif;
-      font-size: 26px; font-weight: 700;
-      color: var(--pink); letter-spacing: -0.5px;
-      white-space: nowrap; margin-right: 8px;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--pink);
+      letter-spacing: -0.5px;
+      white-space: nowrap;
+      margin-right: 8px;
     }
+
     .search-bar {
-      flex: 1; display: flex; align-items: center;
-      background: var(--bg); border-radius: 4px;
-      padding: 0 14px; height: 38px; gap: 8px;
-      border: 1px solid var(--border); max-width: 560px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      border-radius: 4px;
+      padding: 0 14px;
+      height: 38px;
+      gap: 8px;
+      border: 1px solid var(--border);
+      max-width: 560px;
     }
+
     .search-bar input {
-      border: none; background: transparent;
-      font-family: var(--font); font-size: 13px;
-      color: var(--text); outline: none; width: 100%;
+      border: none;
+      background: transparent;
+      font-family: var(--font);
+      font-size: 13px;
+      color: var(--text);
+      outline: none;
+      width: 100%;
     }
-    .search-bar input::placeholder { color: var(--text3); }
-    .header-actions { display: flex; align-items: center; gap: 28px; margin-left: auto; }
+
+    .search-bar input::placeholder {
+      color: var(--text3);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-left: auto;
+    }
+
     .header-action {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 3px; cursor: pointer; color: var(--text);
-      font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
-      text-transform: uppercase; position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      position: relative;
     }
-    .header-action:hover { color: var(--pink); }
+
+    .header-action:hover {
+      color: var(--pink);
+    }
+
     .badge {
-      position: absolute; top: -6px; right: -8px;
-      background: var(--pink); color: #fff;
-      width: 16px; height: 16px; border-radius: 50%;
-      font-size: 10px; display: flex; align-items: center; justify-content: center;
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: var(--pink);
+      color: #fff;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 700;
     }
 
@@ -119,735 +219,1615 @@
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
+
     .nav-tabs-inner {
-      max-width: 1380px; margin: 0 auto;
-      display: flex; padding: 0 20px;
-      overflow-x: auto; scrollbar-width: none;
+      max-width: 1380px;
+      margin: 0 auto;
+      display: flex;
+      padding: 0 20px;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
-    .nav-tabs-inner::-webkit-scrollbar { display: none; }
+
+    .nav-tabs-inner::-webkit-scrollbar {
+      display: none;
+    }
+
     .nav-tab {
-      padding: 13px 20px; font-size: 13px; font-weight: 600;
-      letter-spacing: 0.04em; white-space: nowrap; color: var(--text2);
-      cursor: pointer; border-bottom: 3px solid transparent;
+      padding: 13px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      color: var(--text2);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
       transition: color 0.15s, border-color 0.15s;
     }
-    .nav-tab:hover, .nav-tab.active { color: var(--pink); border-bottom-color: var(--pink); }
-    .nav-tab.sale { color: #e31c23; }
-    .nav-tab.ct-tab { color: var(--pink); font-weight: 700; }
+
+    .nav-tab:hover,
+    .nav-tab.active {
+      color: var(--pink);
+      border-bottom-color: var(--pink);
+    }
+
+    .nav-tab.sale {
+      color: #e31c23;
+    }
+
+    .nav-tab.ct-tab {
+      color: var(--pink);
+      font-weight: 700;
+    }
 
     /* PAGE */
-    .page { max-width: 1380px; margin: 0 auto; padding: 0 20px 40px; }
+    .page {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+    }
 
     /* HERO SLIDER */
     .hero-slider {
-      position: relative; border-radius: 8px; overflow: hidden;
-      margin: 16px 0; cursor: pointer;
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 16px 0;
+      cursor: pointer;
     }
-    .slides { display: flex; transition: transform 0.5s ease; }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
     .slide {
-      min-width: 100%; height: 380px;
-      display: flex; align-items: center; position: relative; overflow: hidden;
+      min-width: 100%;
+      height: 380px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
     }
-    .slide-1 { background: linear-gradient(110deg, #fde8ef 0%, #fce4f0 40%, #e8d4f5 100%); }
-    .slide-2 { background: linear-gradient(110deg, #e8f4fd 0%, #dceffe 40%, #d4f0e8 100%); }
-    .slide-3 { background: linear-gradient(110deg, #fdf5e8 0%, #feecd0 40%, #fde2cc 100%); }
-    .slide-content { padding: 0 60px; z-index: 2; position: relative; max-width: 520px; }
+
+    .slide-1 {
+      background: linear-gradient(110deg, #fde8ef 0%, #fce4f0 40%, #e8d4f5 100%);
+    }
+
+    .slide-2 {
+      background: linear-gradient(110deg, #e8f4fd 0%, #dceffe 40%, #d4f0e8 100%);
+    }
+
+    .slide-3 {
+      background: linear-gradient(110deg, #fdf5e8 0%, #feecd0 40%, #fde2cc 100%);
+    }
+
+    .slide-content {
+      padding: 0 60px;
+      z-index: 2;
+      position: relative;
+      max-width: 520px;
+    }
+
     .slide-tag {
-      display: inline-block; background: var(--pink); color: #fff;
-      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; padding: 4px 10px; border-radius: 2px; margin-bottom: 16px;
+      display: inline-block;
+      background: var(--pink);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+      margin-bottom: 16px;
     }
-    .slide-tag.blue { background: #4a90d9; }
-    .slide-tag.orange { background: var(--orange); }
+
+    .slide-tag.blue {
+      background: #4a90d9;
+    }
+
+    .slide-tag.orange {
+      background: var(--orange);
+    }
+
     .slide-title {
       font-family: 'Playfair Display', serif;
-      font-size: 44px; font-weight: 700; line-height: 1.1;
-      color: var(--text); margin-bottom: 8px;
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 8px;
     }
-    .slide-title em { font-style: italic; color: var(--pink); }
-    .slide-title .blue-txt { color: #4a90d9; }
-    .slide-title .orange-txt { color: var(--orange); }
-    .slide-sub { font-size: 15px; color: var(--text2); margin-bottom: 24px; }
+
+    .slide-title em {
+      font-style: italic;
+      color: var(--pink);
+    }
+
+    .slide-title .blue-txt {
+      color: #4a90d9;
+    }
+
+    .slide-title .orange-txt {
+      color: var(--orange);
+    }
+
+    .slide-sub {
+      font-size: 15px;
+      color: var(--text2);
+      margin-bottom: 24px;
+    }
+
     .slide-cta {
-      background: var(--text); color: #fff; border: none;
-      padding: 12px 32px; font-size: 13px; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      border-radius: 2px; transition: background 0.2s;
+      background: var(--text);
+      color: #fff;
+      border: none;
+      padding: 12px 32px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.2s;
     }
-    .slide-cta:hover { background: var(--pink); }
+
+    .slide-cta:hover {
+      background: var(--pink);
+    }
+
     .slide-cta.outlined {
-      background: transparent; color: var(--text);
+      background: transparent;
+      color: var(--text);
       border: 2px solid var(--text);
     }
-    .slide-cta.outlined:hover { background: var(--text); color: #fff; }
-    .slide-art {
-      position: absolute; right: 0; top: 0; bottom: 0;
-      width: 50%; display: flex; align-items: center; justify-content: center;
+
+    .slide-cta.outlined:hover {
+      background: var(--text);
+      color: #fff;
     }
+
+    .slide-art {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .art-blob {
-      width: 300px; height: 300px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
     }
+
     .art-text {
       font-family: 'Playfair Display', serif;
-      font-weight: 700; text-align: center; line-height: 1.1;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.1;
     }
+
     .art-ring {
-      position: absolute; border-radius: 50%; border: 1px dashed;
+      position: absolute;
+      border-radius: 50%;
+      border: 1px dashed;
     }
+
     .slider-dots {
-      position: absolute; bottom: 16px; left: 50%;
-      transform: translateX(-50%); display: flex; gap: 6px; z-index: 10;
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 10;
     }
+
     .dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: rgba(40,44,63,0.2); cursor: pointer;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(40, 44, 63, 0.2);
+      cursor: pointer;
       transition: background 0.2s, transform 0.2s;
     }
-    .dot.active { background: var(--pink); transform: scale(1.3); }
-    .s-arrow {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(255,255,255,0.9); border: none;
-      font-size: 16px; color: var(--text); cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      transition: box-shadow 0.2s; z-index: 10;
-      display: flex; align-items: center; justify-content: center;
+
+    .dot.active {
+      background: var(--pink);
+      transform: scale(1.3);
     }
-    .s-arrow:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
-    .s-arrow.prev { left: 16px; }
-    .s-arrow.next { right: 16px; }
+
+    .s-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      font-size: 16px;
+      color: var(--text);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      transition: box-shadow 0.2s;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .s-arrow:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .s-arrow.prev {
+      left: 16px;
+    }
+
+    .s-arrow.next {
+      right: 16px;
+    }
 
     /* SECTION HEADERS */
     .sec-row {
-      display: flex; align-items: baseline; justify-content: space-between;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
       margin: 28px 0 16px;
     }
-    .sec-title { font-size: 20px; font-weight: 700; color: var(--text); }
-    .sec-link {
-      font-size: 12px; font-weight: 700; color: var(--pink);
-      letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;
+
+    .sec-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
     }
-    .sec-link:hover { text-decoration: underline; }
+
+    .sec-link {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--pink);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .sec-link:hover {
+      text-decoration: underline;
+    }
 
     /* CATEGORY PILLS */
     .pills-row {
-      display: flex; gap: 10px; overflow-x: auto;
-      scrollbar-width: none; padding-bottom: 4px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 4px;
     }
-    .pills-row::-webkit-scrollbar { display: none; }
+
+    .pills-row::-webkit-scrollbar {
+      display: none;
+    }
+
     .pill {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 8px; cursor: pointer; flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      flex-shrink: 0;
       transition: transform 0.15s;
     }
-    .pill:hover { transform: translateY(-3px); }
-    .pill-icon {
-      width: 72px; height: 72px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 28px; border: 2px solid var(--border);
-      background: var(--white); transition: border-color 0.15s;
+
+    .pill:hover {
+      transform: translateY(-3px);
     }
-    .pill:hover .pill-icon { border-color: var(--pink); }
-    .pill-label { font-size: 11px; font-weight: 600; color: var(--text2); text-align: center; }
+
+    .pill-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      border: 2px solid var(--border);
+      background: var(--white);
+      transition: border-color 0.15s;
+    }
+
+    .pill:hover .pill-icon {
+      border-color: var(--pink);
+    }
+
+    .pill-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text2);
+      text-align: center;
+    }
 
     /* OFFER CARDS */
-    .offer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
     .offer-card {
-      border-radius: 8px; overflow: hidden; cursor: pointer;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
     }
-    .offer-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-    .offer-inner {
-      height: 160px; display: flex; align-items: center; padding: 24px; gap: 16px;
+
+    .offer-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     }
-    .offer-icon { font-size: 48px; flex-shrink: 0; }
-    .offer-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; opacity: 0.75; }
-    .offer-headline { font-size: 18px; font-weight: 700; line-height: 1.2; margin-bottom: 4px; }
-    .offer-sub { font-size: 12px; opacity: 0.75; }
-    .oc-pink { background: linear-gradient(120deg, #fce4ec, #f8bbd9); color: #880e4f; }
-    .oc-teal { background: linear-gradient(120deg, #e0f7fa, #b2ebf2); color: #00695c; }
-    .oc-amber { background: linear-gradient(120deg, #fff8e1, #ffecb3); color: #e65100; }
+
+    .offer-inner {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      padding: 24px;
+      gap: 16px;
+    }
+
+    .offer-icon {
+      font-size: 48px;
+      flex-shrink: 0;
+    }
+
+    .offer-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      opacity: 0.75;
+    }
+
+    .offer-headline {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .offer-sub {
+      font-size: 12px;
+      opacity: 0.75;
+    }
+
+    .oc-pink {
+      background: linear-gradient(120deg, #fce4ec, #f8bbd9);
+      color: #880e4f;
+    }
+
+    .oc-teal {
+      background: linear-gradient(120deg, #e0f7fa, #b2ebf2);
+      color: #00695c;
+    }
+
+    .oc-amber {
+      background: linear-gradient(120deg, #fff8e1, #ffecb3);
+      color: #e65100;
+    }
 
     /* PRODUCTS STRIP */
     .products-strip {
-      display: flex; gap: 12px; overflow-x: auto;
-      scrollbar-width: none; padding-bottom: 8px;
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 8px;
     }
-    .products-strip::-webkit-scrollbar { display: none; }
+
+    .products-strip::-webkit-scrollbar {
+      display: none;
+    }
+
     .product-card {
-      min-width: 196px; background: var(--white);
-      border-radius: 8px; overflow: hidden;
-      border: 1px solid var(--border); cursor: pointer;
-      transition: box-shadow 0.2s, transform 0.2s; flex-shrink: 0;
+      min-width: 196px;
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.2s;
+      flex-shrink: 0;
     }
-    .product-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.1); transform: translateY(-2px); }
+
+    .product-card:hover {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
     .prod-img {
-      position: relative; background: #f7f7f8;
-      height: 256px; display: flex; align-items: center; justify-content: center;
+      position: relative;
+      background: #f7f7f8;
+      height: 256px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .prod-emoji { font-size: 72px; opacity: 0.35; }
+
+    .prod-emoji {
+      font-size: 72px;
+      opacity: 0.35;
+    }
+
     .wish-btn {
-      position: absolute; top: 8px; right: 8px;
-      width: 30px; height: 30px; border-radius: 50%;
-      background: var(--white); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; cursor: pointer; transition: all 0.15s;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.15s;
     }
-    .wish-btn:hover { background: var(--pink-light); border-color: var(--pink); }
+
+    .wish-btn:hover {
+      background: var(--pink-light);
+      border-color: var(--pink);
+    }
+
     .disc-tag {
-      position: absolute; top: 8px; left: 8px;
-      background: #14958f; color: #fff;
-      font-size: 10px; font-weight: 700; padding: 3px 7px; border-radius: 2px;
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: #14958f;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 2px;
     }
-    .prod-info { padding: 10px 12px 14px; }
-    .prod-brand { font-size: 13px; font-weight: 700; color: var(--text); }
-    .prod-desc { font-size: 12px; color: var(--text3); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .prod-prices { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
-    .p-now { font-size: 14px; font-weight: 700; color: var(--text); }
-    .p-was { font-size: 12px; color: var(--text3); text-decoration: line-through; }
-    .p-off { font-size: 12px; font-weight: 600; color: #14958f; }
-    .prod-rating { display: flex; align-items: center; gap: 4px; margin-top: 4px; }
+
+    .prod-info {
+      padding: 10px 12px 14px;
+    }
+
+    .prod-brand {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .prod-desc {
+      font-size: 12px;
+      color: var(--text3);
+      margin-top: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .prod-prices {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .p-now {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .p-was {
+      font-size: 12px;
+      color: var(--text3);
+      text-decoration: line-through;
+    }
+
+    .p-off {
+      font-size: 12px;
+      font-weight: 600;
+      color: #14958f;
+    }
+
+    .prod-rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
     .rating-pill {
-      background: var(--green); color: #fff;
-      font-size: 10px; font-weight: 700; padding: 2px 6px;
+      background: var(--green);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
       border-radius: 3px;
     }
-    .rating-cnt { font-size: 11px; color: var(--text3); }
+
+    .rating-cnt {
+      font-size: 11px;
+      color: var(--text3);
+    }
 
     /* BRANDS STRIP */
     .brands-strip {
-      display: flex; gap: 10px; overflow-x: auto;
-      scrollbar-width: none; padding-bottom: 4px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 4px;
     }
-    .brands-strip::-webkit-scrollbar { display: none; }
+
+    .brands-strip::-webkit-scrollbar {
+      display: none;
+    }
+
     .brand-pill {
-      flex-shrink: 0; border: 1px solid var(--border);
-      border-radius: 24px; background: var(--white);
-      padding: 8px 20px; font-size: 13px; font-weight: 700;
-      color: var(--text2); cursor: pointer; white-space: nowrap;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: var(--white);
+      padding: 8px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text2);
+      cursor: pointer;
+      white-space: nowrap;
       transition: all 0.15s;
     }
-    .brand-pill:hover { border-color: var(--pink); color: var(--pink); background: var(--pink-light); }
+
+    .brand-pill:hover {
+      border-color: var(--pink);
+      color: var(--pink);
+      background: var(--pink-light);
+    }
 
     /* SALE BANNER */
     .sale-banner {
       border-radius: 8px;
       background: linear-gradient(100deg, #282c3f 0%, #3d4166 50%, #282c3f 100%);
       padding: 40px 60px;
-      display: flex; align-items: center; justify-content: space-between;
-      margin: 24px 0; cursor: pointer; transition: box-shadow 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 24px 0;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
     }
-    .sale-banner:hover { box-shadow: 0 12px 40px rgba(40,44,63,0.25); }
-    .sale-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #ffd700; margin-bottom: 12px; }
-    .sale-h { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 8px; }
-    .sale-h span { color: var(--pink); }
-    .sale-sub { font-size: 16px; color: rgba(255,255,255,0.65); margin-bottom: 24px; }
-    .sale-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-    .sale-chip { border: 1px solid rgba(255,255,255,0.25); color: #fff; padding: 5px 14px; border-radius: 16px; font-size: 12px; font-weight: 600; }
-    .sale-right { text-align: center; flex-shrink: 0; }
-    .sale-pct { font-family: 'Playfair Display', serif; font-size: 72px; font-weight: 700; color: #ffd700; line-height: 1; }
-    .sale-pct-lbl { font-size: 14px; color: rgba(255,255,255,0.7); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .sale-banner:hover {
+      box-shadow: 0 12px 40px rgba(40, 44, 63, 0.25);
+    }
+
+    .sale-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #ffd700;
+      margin-bottom: 12px;
+    }
+
+    .sale-h {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .sale-h span {
+      color: var(--pink);
+    }
+
+    .sale-sub {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.65);
+      margin-bottom: 24px;
+    }
+
+    .sale-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .sale-chip {
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      padding: 5px 14px;
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .sale-right {
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .sale-pct {
+      font-family: 'Playfair Display', serif;
+      font-size: 72px;
+      font-weight: 700;
+      color: #ffd700;
+      line-height: 1;
+    }
+
+    .sale-pct-lbl {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
     .sale-cta {
-      display: inline-block; background: var(--pink); color: #fff;
-      border: none; padding: 12px 36px; font-size: 13px; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase; border-radius: 2px;
-      margin-top: 20px; cursor: pointer; transition: background 0.2s;
+      display: inline-block;
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      padding: 12px 36px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background 0.2s;
     }
-    .sale-cta:hover { background: var(--pink-dark); }
+
+    .sale-cta:hover {
+      background: var(--pink-dark);
+    }
 
     /* GENDER CARDS */
-    .gender-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }
+    .gender-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
     .gender-card {
-      border-radius: 8px; overflow: hidden; cursor: pointer;
-      height: 220px; display: flex; align-items: flex-end;
-      position: relative; transition: box-shadow 0.2s;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      height: 220px;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      transition: box-shadow 0.2s;
     }
-    .gender-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.15); }
-    .gc-w { background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 50%, #e8a0c4 100%); }
-    .gc-m { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%); }
+
+    .gender-card:hover {
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+    }
+
+    .gc-w {
+      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 50%, #e8a0c4 100%);
+    }
+
+    .gc-m {
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%);
+    }
+
     .gc-art {
-      position: absolute; inset: 0; display: flex;
-      align-items: center; justify-content: flex-end;
-      padding-right: 24px; font-size: 100px; opacity: 0.15;
-      font-family: 'Playfair Display', serif; font-weight: 700;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 24px;
+      font-size: 100px;
+      opacity: 0.15;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
     }
-    .gc-info { position: relative; padding: 20px 24px; width: 100%; }
-    .gc-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--text); }
-    .gc-sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+    .gc-info {
+      position: relative;
+      padding: 20px 24px;
+      width: 100%;
+    }
+
+    .gc-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .gc-sub {
+      font-size: 12px;
+      color: var(--text2);
+      margin-top: 2px;
+    }
+
     .gc-btn {
-      margin-top: 10px; background: var(--text); color: #fff;
-      border: none; padding: 8px 20px;
-      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; border-radius: 2px; cursor: pointer; transition: background 0.2s;
+      margin-top: 10px;
+      background: var(--text);
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s;
     }
-    .gc-btn:hover { background: var(--pink); }
+
+    .gc-btn:hover {
+      background: var(--pink);
+    }
 
     /* APP BANNER */
     .app-banner {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: 8px; padding: 28px 36px;
-      display: flex; align-items: center; justify-content: space-between;
-      margin: 24px 0; gap: 24px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 28px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 24px 0;
+      gap: 24px;
     }
-    .app-left { display: flex; align-items: center; gap: 20px; }
-    .app-icon { font-size: 48px; }
-    .app-title { font-size: 18px; font-weight: 700; color: var(--text); }
-    .app-sub { font-size: 13px; color: var(--text3); margin-top: 3px; }
-    .app-btns { display: flex; gap: 10px; }
+
+    .app-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .app-icon {
+      font-size: 48px;
+    }
+
+    .app-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .app-sub {
+      font-size: 13px;
+      color: var(--text3);
+      margin-top: 3px;
+    }
+
+    .app-btns {
+      display: flex;
+      gap: 10px;
+    }
+
     .app-btn {
-      border: 2px solid var(--text); border-radius: 6px;
-      padding: 8px 18px; font-size: 12px; font-weight: 700;
-      color: var(--text); background: transparent; transition: all 0.15s;
+      border: 2px solid var(--text);
+      border-radius: 6px;
+      padding: 8px 18px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      background: transparent;
+      transition: all 0.15s;
     }
-    .app-btn:hover { background: var(--text); color: #fff; }
+
+    .app-btn:hover {
+      background: var(--text);
+      color: #fff;
+    }
 
     /* FOOTER */
     footer {
-      background: var(--white); border-top: 1px solid var(--border);
-      margin-top: 32px; padding: 36px 20px 20px;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      margin-top: 32px;
+      padding: 36px 20px 20px;
     }
-    .footer-inner { max-width: 1380px; margin: 0 auto; }
-    .footer-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 24px; margin-bottom: 32px; }
-    .f-col-title { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); margin-bottom: 14px; }
-    .f-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-    .f-links a { font-size: 13px; color: var(--text2); transition: color 0.15s; cursor: pointer; }
-    .f-links a:hover { color: var(--pink); }
+
+    .footer-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .f-col-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .f-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .f-links a {
+      font-size: 13px;
+      color: var(--text2);
+      transition: color 0.15s;
+      cursor: pointer;
+    }
+
+    .f-links a:hover {
+      color: var(--pink);
+    }
+
     .footer-btm {
-      border-top: 1px solid var(--border); padding-top: 16px;
-      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .footer-copy { font-size: 12px; color: var(--text3); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text3);
+    }
 
     /* CT LAB */
     .ct-lab-wrap {
-      background: var(--white); border: 2px solid var(--pink);
-      border-radius: 8px; margin: 0 0 24px; overflow: hidden;
+      background: var(--white);
+      border: 2px solid var(--pink);
+      border-radius: 8px;
+      margin: 0 0 24px;
+      overflow: hidden;
     }
+
     .ct-lab-hdr {
-      background: var(--text); padding: 20px 28px;
-      display: flex; align-items: center; gap: 14px;
+      background: var(--text);
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
-    .ct-pulse { width: 10px; height: 10px; border-radius: 50%; background: #4ade80; flex-shrink: 0; animation: pulseAnim 2s infinite; }
-    @keyframes pulseAnim { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.85);} }
-    .ct-hdr-title { font-size: 16px; font-weight: 700; color: #fff; }
-    .ct-hdr-sub { font-size: 12px; color: rgba(255,255,255,0.5); margin-left: auto; }
-    .ct-lab-body { padding: 24px 28px; }
-    .ct-groups { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+
+    .ct-pulse {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #4ade80;
+      flex-shrink: 0;
+      animation: pulseAnim 2s infinite;
+    }
+
+    @keyframes pulseAnim {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(0.85);
+      }
+    }
+
+    .ct-hdr-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .ct-hdr-sub {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-left: auto;
+    }
+
+    .ct-lab-body {
+      padding: 24px 28px;
+    }
+
+    .ct-groups {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
     .ct-grp-name {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--text3);
-      margin-bottom: 10px; padding-bottom: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 10px;
+      padding-bottom: 8px;
       border-bottom: 1px solid var(--border);
     }
-    .ct-btns { display: flex; flex-direction: column; gap: 6px; }
+
+    .ct-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
     .ct-btn {
-      background: var(--bg); border: 1px solid var(--border);
-      color: var(--text2); padding: 9px 14px;
-      font-size: 12.5px; font-weight: 500; text-align: left;
-      border-radius: 4px; display: flex; align-items: center; gap: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text2);
+      padding: 9px 14px;
+      font-size: 12.5px;
+      font-weight: 500;
+      text-align: left;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       transition: all 0.15s;
     }
-    .ct-btn:hover { border-color: var(--pink); background: var(--pink-light); color: var(--pink); }
-    .ct-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: background 0.15s; }
-    .ct-btn:hover .ct-dot { background: var(--pink); }
-    .ct-console {
-      margin-top: 20px; background: #1e2230;
-      border-radius: 6px; padding: 16px 20px;
+
+    .ct-btn:hover {
+      border-color: var(--pink);
+      background: var(--pink-light);
+      color: var(--pink);
     }
-    .ct-console-lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #4ade80; margin-bottom: 10px; }
+
+    .ct-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--border);
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+
+    .ct-btn:hover .ct-dot {
+      background: var(--pink);
+    }
+
+    .ct-console {
+      margin-top: 20px;
+      background: #1e2230;
+      border-radius: 6px;
+      padding: 16px 20px;
+    }
+
+    .ct-console-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #4ade80;
+      margin-bottom: 10px;
+    }
+
     #ct-log {
-      font-family: 'Courier New', monospace; font-size: 12px;
-      color: rgba(255,255,255,0.65); line-height: 1.9;
-      min-height: 60px; max-height: 180px; overflow-y: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.9;
+      min-height: 60px;
+      max-height: 180px;
+      overflow-y: auto;
       white-space: pre-wrap;
     }
-    #ct-id-out { font-size: 13px; font-weight: 700; color: #ffd700; margin-top: 6px; }
+
+    #ct-id-out {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffd700;
+      margin-top: 6px;
+    }
 
     /* TOAST */
-    .toast-wrap { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
+    .toast-wrap {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
     .toast {
-      background: var(--text); color: #fff; padding: 11px 18px;
-      border-radius: 4px; font-size: 13px; font-weight: 500;
-      display: flex; align-items: center; gap: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.25); max-width: 320px;
+      background: var(--text);
+      color: #fff;
+      padding: 11px 18px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      max-width: 320px;
       animation: toastIn 0.28s ease;
     }
-    .t-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; flex-shrink: 0; }
-    .t-dot.pink { background: var(--pink); }
-    @keyframes toastIn { from{transform:translateY(10px);opacity:0;} to{transform:translateY(0);opacity:1;} }
 
-    @media(max-width:900px){
-      .offer-grid{grid-template-columns:1fr;}
-      .footer-grid{grid-template-columns:repeat(2,1fr);}
-      .ct-groups{grid-template-columns:1fr;}
-      .gender-grid{grid-template-columns:1fr;}
-      .sale-banner{flex-direction:column;text-align:center;padding:28px;}
-      .sale-right{display:none;}
-      .app-banner{flex-direction:column;}
+    .t-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+      flex-shrink: 0;
+    }
+
+    .t-dot.pink {
+      background: var(--pink);
+    }
+
+    @keyframes toastIn {
+      from {
+        transform: translateY(10px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media(max-width:900px) {
+      .offer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .ct-groups {
+        grid-template-columns: 1fr;
+      }
+
+      .gender-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sale-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 28px;
+      }
+
+      .sale-right {
+        display: none;
+      }
+
+      .app-banner {
+        flex-direction: column;
+      }
+    }
+
+    #dynamic-sections {
+      margin-top: 20px;
+    }
+
+    .home-section {
+      margin-bottom: 28px;
     }
   </style>
 </head>
+
 <body>
 
-<!-- TOP BAR -->
-<div class="top-bar">🎉 India's Biggest Fashion Sale is LIVE! <span>Up to 80% OFF</span> on 5 Lakh+ styles &nbsp;|&nbsp; Free delivery on orders above ₹499</div>
+  <!-- TOP BAR -->
+  <div class="top-bar">🎉 India's Biggest Fashion Sale is LIVE! <span>Up to 80% OFF</span> on 5 Lakh+ styles
+    &nbsp;|&nbsp; Free delivery on orders above ₹499</div>
 
-<!-- HEADER -->
-<header>
-  <div class="header-main">
-    <div class="logo">drip.</div>
-    <div class="search-bar">
-      <svg width="15" height="15" fill="none" stroke="#94969f" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="search-input" type="text" placeholder="Search for products, brands and more" />
-    </div>
-    <div class="header-actions">
-      <div class="header-action" onclick="trackEvent('Profile Clicked')">
-        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        Profile
+  <!-- HEADER -->
+  <header>
+    <div class="header-main">
+      <div class="logo">drip.</div>
+      <div class="search-bar">
+        <svg width="15" height="15" fill="none" stroke="#94969f" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input id="search-input" type="text" placeholder="Search for products, brands and more" />
       </div>
-      <div class="header-action" onclick="trackEvent('Wishlist Viewed')">
-        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        Wishlist
-        <div class="badge">3</div>
-      </div>
-      <div class="header-action" onclick="trackEvent('Bag Opened')">
-        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        Bag
-        <div class="badge">1</div>
-      </div>
-    </div>
-  </div>
-</header>
-
-<!-- NAV TABS -->
-<div class="nav-tabs">
-  <div class="nav-tabs-inner">
-    <div class="nav-tab active" onclick="setTab(this,'MEN')">MEN</div>
-    <div class="nav-tab" onclick="setTab(this,'WOMEN')">WOMEN</div>
-    <div class="nav-tab" onclick="setTab(this,'KIDS')">KIDS</div>
-    <div class="nav-tab" onclick="setTab(this,'HOME')">HOME & LIVING</div>
-    <div class="nav-tab" onclick="setTab(this,'BEAUTY')">BEAUTY</div>
-    <div class="nav-tab" onclick="setTab(this,'STUDIO')">STUDIO</div>
-    <div class="nav-tab sale" onclick="setTab(this,'SALE','sale')">🔥 SALE</div>
-    <div class="nav-tab" onclick="setTab(this,'PREMIUM')">PREMIUM</div>
-    <div class="nav-tab ct-tab" onclick="document.getElementById('ct-anchor').scrollIntoView({behavior:'smooth'})">⚡ CT LAB</div>
-  </div>
-</div>
-
-<!-- PAGE -->
-<div class="page">
-
-  <!-- HERO SLIDER -->
-  <div class="hero-slider">
-    <div class="slides" id="slides-track">
-
-      <div class="slide slide-1" onclick="trackEvent('Hero Banner Clicked',{banner:'EndOfSeason'})">
-        <div class="slide-content">
-          <div class="slide-tag">End of Season Sale</div>
-          <div class="slide-title">Flat <em>50–80%</em><br>Off Everything</div>
-          <div class="slide-sub">5 lakh+ styles from 5,000+ brands</div>
-          <button class="slide-cta">Shop Now</button>
+      <div class="header-actions">
+        <div class="header-action" onclick="trackEvent('Profile Clicked')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+          </svg>
+          Profile
         </div>
-        <div class="slide-art">
-          <div style="position:relative;width:320px;height:320px;">
-            <div class="art-blob" style="width:260px;height:260px;background:rgba(255,63,108,0.1);top:30px;left:30px;position:absolute;">
-              <div class="art-text" style="font-size:52px;color:#ff3f6c;">50%<br><span style="font-size:22px;font-style:italic">OFF</span></div>
+        <div class="header-action" onclick="trackEvent('Wishlist Viewed')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+          Wishlist
+          <div class="badge">3</div>
+        </div>
+        <div class="header-action" onclick="trackEvent('Bag Opened')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          Bag
+          <div class="badge">1</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAV TABS -->
+  <div class="nav-tabs">
+    <div class="nav-tabs-inner">
+      <div class="nav-tab active" onclick="setTab(this,'MEN')">MEN</div>
+      <div class="nav-tab" onclick="setTab(this,'WOMEN')">WOMEN</div>
+      <div class="nav-tab" onclick="setTab(this,'KIDS')">KIDS</div>
+      <div class="nav-tab" onclick="setTab(this,'HOME')">HOME & LIVING</div>
+      <div class="nav-tab" onclick="setTab(this,'BEAUTY')">BEAUTY</div>
+      <div class="nav-tab" onclick="setTab(this,'STUDIO')">STUDIO</div>
+      <div class="nav-tab sale" onclick="setTab(this,'SALE','sale')">🔥 SALE</div>
+      <div class="nav-tab" onclick="setTab(this,'PREMIUM')">PREMIUM</div>
+      <div class="nav-tab ct-tab" onclick="document.getElementById('ct-anchor').scrollIntoView({behavior:'smooth'})">⚡
+        CT LAB</div>
+    </div>
+  </div>
+
+  <!-- PAGE -->
+  <div class="page">
+
+    <!-- HERO SLIDER -->
+    <div class="hero-slider">
+      <div class="slides" id="slides-track">
+
+        <div class="slide slide-1" onclick="trackEvent('Hero Banner Clicked',{banner:'EndOfSeason'})">
+          <div class="slide-content">
+            <div class="slide-tag">End of Season Sale</div>
+            <div class="slide-title">Flat <em>50–80%</em><br>Off Everything</div>
+            <div class="slide-sub">5 lakh+ styles from 5,000+ brands</div>
+            <button class="slide-cta">Shop Now</button>
+          </div>
+          <div class="slide-art">
+            <div style="position:relative;width:320px;height:320px;">
+              <div class="art-blob"
+                style="width:260px;height:260px;background:rgba(255,63,108,0.1);top:30px;left:30px;position:absolute;">
+                <div class="art-text" style="font-size:52px;color:#ff3f6c;">50%<br><span
+                    style="font-size:22px;font-style:italic">OFF</span></div>
+              </div>
+              <div
+                style="position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(255,63,108,0.08);top:0;right:0;display:flex;align-items:center;justify-content:center;">
+                <div class="art-text" style="font-size:16px;color:#c81c42;">FREE<br>SHIP</div>
+              </div>
+              <div
+                style="position:absolute;width:80px;height:80px;border-radius:50%;background:rgba(255,144,90,0.12);bottom:20px;left:10px;display:flex;align-items:center;justify-content:center;">
+                <div class="art-text" style="font-size:13px;color:#cc5500;">NEW<br>IN</div>
+              </div>
             </div>
-            <div style="position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(255,63,108,0.08);top:0;right:0;display:flex;align-items:center;justify-content:center;"><div class="art-text" style="font-size:16px;color:#c81c42;">FREE<br>SHIP</div></div>
-            <div style="position:absolute;width:80px;height:80px;border-radius:50%;background:rgba(255,144,90,0.12);bottom:20px;left:10px;display:flex;align-items:center;justify-content:center;"><div class="art-text" style="font-size:13px;color:#cc5500;">NEW<br>IN</div></div>
           </div>
         </div>
-      </div>
 
-      <div class="slide slide-2" onclick="trackEvent('Hero Banner Clicked',{banner:'NewArrivals'})">
-        <div class="slide-content">
-          <div class="slide-tag blue">New Arrivals</div>
-          <div class="slide-title">Summer <span class="blue-txt">2025</span><br>Collection</div>
-          <div class="slide-sub">Fresh styles landing every day</div>
-          <button class="slide-cta outlined">Explore Now</button>
-        </div>
-        <div class="slide-art">
-          <div style="position:relative;width:300px;height:300px;">
-            <div class="art-blob" style="width:240px;height:240px;background:rgba(74,144,217,0.1);top:30px;left:30px;position:absolute;">
-              <div class="art-text" style="font-size:36px;color:#4a90d9;font-style:italic;">New<br>In</div>
+        <div class="slide slide-2" onclick="trackEvent('Hero Banner Clicked',{banner:'NewArrivals'})">
+          <div class="slide-content">
+            <div class="slide-tag blue">New Arrivals</div>
+            <div class="slide-title">Summer <span class="blue-txt">2025</span><br>Collection</div>
+            <div class="slide-sub">Fresh styles landing every day</div>
+            <button class="slide-cta outlined">Explore Now</button>
+          </div>
+          <div class="slide-art">
+            <div style="position:relative;width:300px;height:300px;">
+              <div class="art-blob"
+                style="width:240px;height:240px;background:rgba(74,144,217,0.1);top:30px;left:30px;position:absolute;">
+                <div class="art-text" style="font-size:36px;color:#4a90d9;font-style:italic;">New<br>In</div>
+              </div>
+              <div
+                style="position:absolute;width:100px;height:100px;border-radius:50%;background:rgba(74,144,217,0.08);top:0;right:0;display:flex;align-items:center;justify-content:center;">
+                <div class="art-text" style="font-size:13px;color:#2c6fa8;">JUST<br>IN</div>
+              </div>
             </div>
-            <div style="position:absolute;width:100px;height:100px;border-radius:50%;background:rgba(74,144,217,0.08);top:0;right:0;display:flex;align-items:center;justify-content:center;"><div class="art-text" style="font-size:13px;color:#2c6fa8;">JUST<br>IN</div></div>
           </div>
         </div>
-      </div>
 
-      <div class="slide slide-3" onclick="trackEvent('Hero Banner Clicked',{banner:'TopBrands'})">
-        <div class="slide-content">
-          <div class="slide-tag orange">Top Brands</div>
-          <div class="slide-title">Your Favourite<br><span class="orange-txt">Brands</span> Are Here</div>
-          <div class="slide-sub">Nike, Puma, H&M, Zara, Levi's & more</div>
-          <button class="slide-cta">Shop Brands</button>
-        </div>
-        <div class="slide-art">
-          <div style="position:relative;width:300px;height:300px;">
-            <div class="art-blob" style="width:240px;height:240px;background:rgba(255,144,90,0.1);top:30px;left:30px;position:absolute;">
-              <div class="art-text" style="font-size:32px;color:#cc5500;">1000+<br><span style="font-size:18px;">Brands</span></div>
+        <div class="slide slide-3" onclick="trackEvent('Hero Banner Clicked',{banner:'TopBrands'})">
+          <div class="slide-content">
+            <div class="slide-tag orange">Top Brands</div>
+            <div class="slide-title">Your Favourite<br><span class="orange-txt">Brands</span> Are Here</div>
+            <div class="slide-sub">Nike, Puma, H&M, Zara, Levi's & more</div>
+            <button class="slide-cta">Shop Brands</button>
+          </div>
+          <div class="slide-art">
+            <div style="position:relative;width:300px;height:300px;">
+              <div class="art-blob"
+                style="width:240px;height:240px;background:rgba(255,144,90,0.1);top:30px;left:30px;position:absolute;">
+                <div class="art-text" style="font-size:32px;color:#cc5500;">1000+<br><span
+                    style="font-size:18px;">Brands</span></div>
+              </div>
+              <div
+                style="position:absolute;width:100px;height:100px;border-radius:50%;background:rgba(255,144,90,0.08);top:0;right:10px;display:flex;align-items:center;justify-content:center;">
+                <div class="art-text" style="font-size:13px;color:#994400;">BRAND<br>DEALS</div>
+              </div>
             </div>
-            <div style="position:absolute;width:100px;height:100px;border-radius:50%;background:rgba(255,144,90,0.08);top:0;right:10px;display:flex;align-items:center;justify-content:center;"><div class="art-text" style="font-size:13px;color:#994400;">BRAND<br>DEALS</div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="slider-dots" id="slider-dots"></div>
+      <button class="s-arrow prev" onclick="changeSlide(-1)">&#8592;</button>
+      <button class="s-arrow next" onclick="changeSlide(1)">&#8594;</button>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="sec-row">
+      <div class="sec-title">Shop by Category</div>
+      <span class="sec-link" onclick="trackEvent('All Categories Clicked')">View All ›</span>
+    </div>
+    <div class="pills-row">
+      <div class="pill" onclick="trackEvent('Category Clicked',{cat:'T-Shirts'})">
+        <div class="pill-icon">👕</div>
+        <div class="pill-label">T-Shirts</div>
+      </div>
+      <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Jeans'})">
+        <div class="pill-icon">👖</div>
+        <div class="pill-label">Jeans</div>
+      </div>
+      <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Dresses'})">
+        <div class="pill-icon">👗</div>
+        <div class="pill-label">Dresses</div>
+      </div>
+      <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Sneakers'})">
+        <div class="pill-icon">👟</div>
+        <div class="pill-label">Sneakers</div>
+      </div>
+      <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Watches'})">
+        <div class="pill-icon">⌚</div>
+        <div class="pill-label">Watches</div>
+      </div>
+      <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Bags'})">
+        <div class="pill-icon">👜</div>
+        <div class="pill-label">Bags</div>
+      </div>
+      <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Sunglasses'})">
+        <div class="pill-icon">🕶️</div>
+        <div class="pill-label">Sunglasses</div>
+      </div>
+      <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Kurtas'})">
+        <div class="pill-icon">🥻</div>
+        <div class="pill-label">Kurtas</div>
+      </div>
+      <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Jackets'})">
+        <div class="pill-icon">🧥</div>
+        <div class="pill-label">Jackets</div>
+      </div>
+      <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Ethnic'})">
+        <div class="pill-icon">🎀</div>
+        <div class="pill-label">Ethnic Wear</div>
+      </div>
+      <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Sports'})">
+        <div class="pill-icon">🏃</div>
+        <div class="pill-label">Sports</div>
+      </div>
+      <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Beauty'})">
+        <div class="pill-icon">💄</div>
+        <div class="pill-label">Beauty</div>
+      </div>
+    </div>
+
+    <!-- OFFER CARDS -->
+    <div class="offer-grid">
+      <div class="offer-card" data-tile-key="top_brands" onclick="trackEvent('Offer Clicked',{type:'Top Brands'})">
+        <div class="offer-inner oc-pink">
+          <div class="offer-icon">🏷️</div>
+          <div>
+            <div class="offer-badge">Limited Time</div>
+            <div class="offer-headline">Top Brands<br>Upto 70% Off</div>
+            <div class="offer-sub">Nike, Puma, Adidas & more</div>
+          </div>
+        </div>
+      </div>
+      <div class="offer-card" data-tile-key="new_arrivals" onclick="trackEvent('Offer Clicked',{type:'New Arrivals'})">
+        <div class="offer-inner oc-teal">
+          <div class="offer-icon">✨</div>
+          <div>
+            <div class="offer-badge">Fresh Drop</div>
+            <div class="offer-headline">New Arrivals<br>Every Day</div>
+            <div class="offer-sub">Be the first to shop</div>
+          </div>
+        </div>
+      </div>
+      <div class="offer-card" data-tile-key="free_delivery"
+        onclick="trackEvent('Offer Clicked',{type:'Free Delivery'})">
+        <div class="offer-inner oc-amber">
+          <div class="offer-icon">🚚</div>
+          <div>
+            <div class="offer-badge">Members Only</div>
+            <div class="offer-headline">Free Delivery<br>On All Orders</div>
+            <div class="offer-sub">Sign up for Drip Insider</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="dynamic-sections">
+
+      <!-- TRENDING -->
+      <div class="home-section" id="sec-trending">
+        <div class="sec-row">
+          <div class="sec-title">Trending Now 🔥</div>
+          <span class="sec-link" onclick="trackEvent('View All Trending')">View All ›</span>
+        </div>
+        <div class="products-strip" id="strip-trending"></div>
+      </div>
+
+      <!-- SHOP YOUR STYLE -->
+      <div class="home-section" id="sec-style">
+        <div class="sec-row">
+          <div class="sec-title">Shop Your Style</div>
+        </div>
+
+        <div class="gender-grid">
+          <div class="gender-card gc-w" data-tile-key="women"
+            onclick="trackEvent('Gender Tab Clicked',{gender:'Women'})">
+            <div class="gc-art">W</div>
+            <div class="gc-info">
+              <div class="gc-title">Women</div>
+              <div class="gc-sub">Kurtas, Dresses, Tops & more</div>
+              <button class="gc-btn">Shop Women</button>
+            </div>
+          </div>
+
+          <div class="gender-card gc-m" data-tile-key="men" onclick="trackEvent('Gender Tab Clicked',{gender:'Men'})">
+            <div class="gc-art">M</div>
+            <div class="gc-info">
+              <div class="gc-title">Men</div>
+              <div class="gc-sub">T-shirts, Jeans, Formals & more</div>
+              <button class="gc-btn" style="background:#4a90d9">Shop Men</button>
+            </div>
           </div>
         </div>
       </div>
 
-    </div>
-    <div class="slider-dots" id="slider-dots"></div>
-    <button class="s-arrow prev" onclick="changeSlide(-1)">&#8592;</button>
-    <button class="s-arrow next" onclick="changeSlide(1)">&#8594;</button>
-  </div>
-
-  <!-- CATEGORIES -->
-  <div class="sec-row">
-    <div class="sec-title">Shop by Category</div>
-    <span class="sec-link" onclick="trackEvent('All Categories Clicked')">View All ›</span>
-  </div>
-  <div class="pills-row">
-    <div class="pill" onclick="trackEvent('Category Clicked',{cat:'T-Shirts'})"><div class="pill-icon">👕</div><div class="pill-label">T-Shirts</div></div>
-    <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Jeans'})"><div class="pill-icon">👖</div><div class="pill-label">Jeans</div></div>
-    <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Dresses'})"><div class="pill-icon">👗</div><div class="pill-label">Dresses</div></div>
-    <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Sneakers'})"><div class="pill-icon">👟</div><div class="pill-label">Sneakers</div></div>
-    <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Watches'})"><div class="pill-icon">⌚</div><div class="pill-label">Watches</div></div>
-    <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Bags'})"><div class="pill-icon">👜</div><div class="pill-label">Bags</div></div>
-    <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Sunglasses'})"><div class="pill-icon">🕶️</div><div class="pill-label">Sunglasses</div></div>
-    <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Kurtas'})"><div class="pill-icon">🥻</div><div class="pill-label">Kurtas</div></div>
-    <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Jackets'})"><div class="pill-icon">🧥</div><div class="pill-label">Jackets</div></div>
-    <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Ethnic'})"><div class="pill-icon">🎀</div><div class="pill-label">Ethnic Wear</div></div>
-    <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Sports'})"><div class="pill-icon">🏃</div><div class="pill-label">Sports</div></div>
-    <div class="pill" onclick="trackEvent('Category Clicked',{cat:'Beauty'})"><div class="pill-icon">💄</div><div class="pill-label">Beauty</div></div>
-  </div>
-
-  <!-- OFFER CARDS -->
-  <div class="offer-grid">
-    <div class="offer-card" onclick="trackEvent('Offer Clicked',{type:'Top Brands'})">
-      <div class="offer-inner oc-pink">
-        <div class="offer-icon">🏷️</div>
-        <div><div class="offer-badge">Limited Time</div><div class="offer-headline">Top Brands<br>Upto 70% Off</div><div class="offer-sub">Nike, Puma, Adidas & more</div></div>
+      <!-- TOP PICKS -->
+      <div class="home-section" id="sec-top-picks">
+        <div class="sec-row">
+          <div class="sec-title">Top Picks For You</div>
+          <span class="sec-link" onclick="trackEvent('View All Top Picks')">View All ›</span>
+        </div>
+        <div class="products-strip" id="strip-top"></div>
       </div>
-    </div>
-    <div class="offer-card" onclick="trackEvent('Offer Clicked',{type:'New Arrivals'})">
-      <div class="offer-inner oc-teal">
-        <div class="offer-icon">✨</div>
-        <div><div class="offer-badge">Fresh Drop</div><div class="offer-headline">New Arrivals<br>Every Day</div><div class="offer-sub">Be the first to shop</div></div>
+
+      <!-- TOP BRANDS -->
+      <div class="home-section" id="sec-brands">
+        <div class="sec-row">
+          <div class="sec-title">Top Brands</div>
+          <span class="sec-link" onclick="trackEvent('All Brands Clicked')">View All ›</span>
+        </div>
+
+        <div class="brands-strip">
+          <!-- keep your existing brand pills here -->
+          <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Nike'})">Nike</div>
+          <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Puma'})">Puma</div>
+          <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Adidas'})">Adidas</div>
+          <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Zara'})">Zara</div>
+          <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'H&M'})">H&M</div>
+          <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Levis'})">Levi's</div>
+          <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Mango'})">Mango</div>
+          <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Van Heusen'})">Van Heusen</div>
+          <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'US Polo'})">US Polo</div>
+          <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Roadster'})">Roadster</div>
+          <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'W'})">W</div>
+          <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Biba'})">Biba</div>
+          <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Fabindia'})">Fabindia</div>
+        </div>
       </div>
-    </div>
-    <div class="offer-card" onclick="trackEvent('Offer Clicked',{type:'Free Delivery'})">
-      <div class="offer-inner oc-amber">
-        <div class="offer-icon">🚚</div>
-        <div><div class="offer-badge">Members Only</div><div class="offer-headline">Free Delivery<br>On All Orders</div><div class="offer-sub">Sign up for Drip Insider</div></div>
+
+      <!-- NEW ARRIVALS -->
+      <div class="home-section" id="sec-new">
+        <div class="sec-row">
+          <div class="sec-title">New Arrivals ✨</div>
+          <span class="sec-link" onclick="trackEvent('View All New Arrivals')">View All ›</span>
+        </div>
+        <div class="products-strip" id="strip-new"></div>
       </div>
+
     </div>
-  </div>
 
-  <!-- TRENDING -->
-  <div class="sec-row">
-    <div class="sec-title">Trending Now 🔥</div>
-    <span class="sec-link" onclick="trackEvent('View All Trending')">View All ›</span>
-  </div>
-  <div class="products-strip" id="strip-trending"></div>
-
-  <!-- SALE BANNER -->
-  <div class="sale-banner" onclick="trackEvent('Sale Banner Clicked')">
-    <div>
-      <div class="sale-eyebrow">⚡ Flash Sale — Ends Tonight</div>
-      <div class="sale-h">The Big <span>Fashion</span> Sale</div>
-      <div class="sale-sub">India's largest fashion event is here. Shop before it's gone.</div>
-      <div class="sale-chips">
-        <div class="sale-chip">👗 Ethnic Wear</div>
-        <div class="sale-chip">👟 Footwear</div>
-        <div class="sale-chip">💍 Jewellery</div>
-        <div class="sale-chip">🎒 Bags</div>
-      </div>
-      <button class="sale-cta" onclick="trackEvent('Sale CTA Clicked')">Shop the Sale</button>
-    </div>
-    <div class="sale-right">
-      <div class="sale-pct">80%</div>
-      <div class="sale-pct-lbl">Max Discount</div>
-    </div>
-  </div>
-
-  <!-- GENDER -->
-  <div class="sec-row"><div class="sec-title">Shop Your Style</div></div>
-  <div class="gender-grid">
-    <div class="gender-card gc-w" onclick="trackEvent('Gender Tab Clicked',{gender:'Women'})">
-      <div class="gc-art">W</div>
-      <div class="gc-info">
-        <div class="gc-title">Women</div>
-        <div class="gc-sub">Kurtas, Dresses, Tops & more</div>
-        <button class="gc-btn">Shop Women</button>
-      </div>
-    </div>
-    <div class="gender-card gc-m" onclick="trackEvent('Gender Tab Clicked',{gender:'Men'})">
-      <div class="gc-art">M</div>
-      <div class="gc-info">
-        <div class="gc-title">Men</div>
-        <div class="gc-sub">T-shirts, Jeans, Formals & more</div>
-        <button class="gc-btn" style="background:#4a90d9">Shop Men</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- TOP PICKS -->
-  <div class="sec-row">
-    <div class="sec-title">Top Picks For You</div>
-    <span class="sec-link" onclick="trackEvent('View All Top Picks')">View All ›</span>
-  </div>
-  <div class="products-strip" id="strip-top"></div>
-
-  <!-- BRANDS -->
-  <div class="sec-row">
-    <div class="sec-title">Top Brands</div>
-    <span class="sec-link" onclick="trackEvent('All Brands Clicked')">View All ›</span>
-  </div>
-  <div class="brands-strip">
-    <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Nike'})">Nike</div>
-    <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Puma'})">Puma</div>
-    <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Adidas'})">Adidas</div>
-    <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Zara'})">Zara</div>
-    <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'H&M'})">H&M</div>
-    <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Levis'})">Levi's</div>
-    <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Mango'})">Mango</div>
-    <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Van Heusen'})">Van Heusen</div>
-    <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'US Polo'})">US Polo</div>
-    <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Roadster'})">Roadster</div>
-    <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'W'})">W</div>
-    <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Biba'})">Biba</div>
-    <div class="brand-pill" onclick="trackEvent('Brand Clicked',{brand:'Fabindia'})">Fabindia</div>
-  </div>
-
-  <!-- NEW ARRIVALS -->
-  <div class="sec-row" style="margin-top:28px;">
-    <div class="sec-title">New Arrivals ✨</div>
-    <span class="sec-link" onclick="trackEvent('View All New Arrivals')">View All ›</span>
-  </div>
-  <div class="products-strip" id="strip-new"></div>
-
-  <!-- APP BANNER -->
-  <div class="app-banner">
-    <div class="app-left">
-      <div class="app-icon">📱</div>
-      <div>
-        <div class="app-title">Shop on the go with the Drip App</div>
-        <div class="app-sub">Exclusive app-only offers, faster checkout, and personalised recommendations</div>
-      </div>
-    </div>
-    <div class="app-btns">
-      <button class="app-btn" onclick="trackEvent('App Download Clicked',{platform:'iOS'})">🍎 App Store</button>
-      <button class="app-btn" onclick="trackEvent('App Download Clicked',{platform:'Android'})">▶ Google Play</button>
-    </div>
-  </div>
-
-  <!-- ─── CLEVERTAP TESTING LAB ─── -->
-  <div id="ct-anchor"></div>
-  <div class="sec-row">
-    <div class="sec-title">⚡ CleverTap Testing Lab</div>
-  </div>
-  <div class="ct-lab-wrap">
-    <div class="ct-lab-hdr">
-      <div class="ct-pulse"></div>
-      <div class="ct-hdr-title">CleverTap SDK — Testing Console</div>
-      <div class="ct-hdr-sub">Account ID: R9K-Z94-R46Z</div>
-    </div>
-    <div class="ct-lab-body">
-      <div class="ct-groups">
-
+    <!-- APP BANNER -->
+    <div class="app-banner">
+      <div class="app-left">
+        <div class="app-icon">📱</div>
         <div>
-          <div class="ct-grp-name">Events</div>
-          <div class="ct-btns">
-            <button class="ct-btn" onclick="ctPushEvent()"><div class="ct-dot"></div>Push ProductViewed event</button>
-            <button class="ct-btn" onclick="ctWebpopup()"><div class="ct-dot"></div>Web popup event</button>
-            <button class="ct-btn" onclick="ctBoxWebpopup()"><div class="ct-dot"></div>Box default web popup</button>
-            <button class="ct-btn" onclick="ctCustomBoxWebpopup()"><div class="ct-dot"></div>Custom box web popup</button>
-            <button class="ct-btn" onclick="ctCustomSurvey()"><div class="ct-dot"></div>Custom HTML info popup</button>
-            <button class="ct-btn" onclick="ctWebNativeDisplay()"><div class="ct-dot"></div>Web native display trigger</button>
+          <div class="app-title">Shop on the go with the Drip App</div>
+          <div class="app-sub">Exclusive app-only offers, faster checkout, and personalised recommendations</div>
+        </div>
+      </div>
+      <div class="app-btns">
+        <button class="app-btn" onclick="trackEvent('App Download Clicked',{platform:'iOS'})">🍎 App Store</button>
+        <button class="app-btn" onclick="trackEvent('App Download Clicked',{platform:'Android'})">▶ Google Play</button>
+      </div>
+    </div>
+
+    <!-- ─── CLEVERTAP TESTING LAB ─── -->
+    <div id="ct-anchor"></div>
+    <div class="sec-row">
+      <div class="sec-title">⚡ CleverTap Testing Lab</div>
+    </div>
+    <div class="ct-lab-wrap">
+      <div class="ct-lab-hdr">
+        <div class="ct-pulse"></div>
+        <div class="ct-hdr-title">CleverTap SDK — Testing Console</div>
+        <div class="ct-hdr-sub">Account ID: R9K-Z94-R46Z</div>
+      </div>
+      <div class="ct-lab-body">
+        <div class="ct-groups">
+
+          <div>
+            <div class="ct-grp-name">Events</div>
+            <div class="ct-btns">
+              <button class="ct-btn" onclick="ctPushEvent()">
+                <div class="ct-dot"></div>Push ProductViewed event
+              </button>
+              <button class="ct-btn" onclick="ctWebpopup()">
+                <div class="ct-dot"></div>Web popup event
+              </button>
+              <button class="ct-btn" onclick="ctBoxWebpopup()">
+                <div class="ct-dot"></div>Box default web popup
+              </button>
+              <button class="ct-btn" onclick="ctCustomBoxWebpopup()">
+                <div class="ct-dot"></div>Custom box web popup
+              </button>
+              <button class="ct-btn" onclick="ctCustomSurvey()">
+                <div class="ct-dot"></div>Custom HTML info popup
+              </button>
+              <button class="ct-btn" onclick="ctWebNativeDisplay()">
+                <div class="ct-dot"></div>Web native display trigger
+              </button>
+            </div>
           </div>
+
+          <div>
+            <div class="ct-grp-name">User Identity</div>
+            <div class="ct-btns">
+              <button class="ct-btn" onclick="ctOnUserLogin()">
+                <div class="ct-dot"></div>OnUserLogin
+              </button>
+              <button class="ct-btn" onclick="ctProfilePush()">
+                <div class="ct-dot"></div>Profile push
+              </button>
+              <button class="ct-btn" onclick="ctShowId()">
+                <div class="ct-dot"></div>Get CleverTap ID
+              </button>
+              <button class="ct-btn" onclick="ctClear()">
+                <div class="ct-dot"></div>Clear CleverTap session
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div class="ct-grp-name">Privacy & Notifications</div>
+            <div class="ct-btns">
+              <button class="ct-btn" onclick="ctIPTrue()">
+                <div class="ct-dot"></div>IP tracking: ON
+              </button>
+              <button class="ct-btn" onclick="ctIPFalse()">
+                <div class="ct-dot"></div>IP tracking: OFF
+              </button>
+              <button class="ct-btn" onclick="ctSendNotification()">
+                <div class="ct-dot"></div>Request push notification
+              </button>
+            </div>
+          </div>
+
         </div>
 
+        <div class="ct-console">
+          <div class="ct-console-lbl">● Live Console</div>
+          <div id="ct-log">Ready — waiting for events…</div>
+          <div id="ct-id-out"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end .page -->
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
         <div>
-          <div class="ct-grp-name">User Identity</div>
-          <div class="ct-btns">
-            <button class="ct-btn" onclick="ctOnUserLogin()"><div class="ct-dot"></div>OnUserLogin</button>
-            <button class="ct-btn" onclick="ctProfilePush()"><div class="ct-dot"></div>Profile push</button>
-            <button class="ct-btn" onclick="ctShowId()"><div class="ct-dot"></div>Get CleverTap ID</button>
-            <button class="ct-btn" onclick="ctClear()"><div class="ct-dot"></div>Clear CleverTap session</button>
-          </div>
+          <div class="f-col-title">Online Shopping</div>
+          <ul class="f-links">
+            <li><a>Men</a></li>
+            <li><a>Women</a></li>
+            <li><a>Kids</a></li>
+            <li><a>Home & Living</a></li>
+            <li><a>Beauty</a></li>
+          </ul>
         </div>
-
         <div>
-          <div class="ct-grp-name">Privacy & Notifications</div>
-          <div class="ct-btns">
-            <button class="ct-btn" onclick="ctIPTrue()"><div class="ct-dot"></div>IP tracking: ON</button>
-            <button class="ct-btn" onclick="ctIPFalse()"><div class="ct-dot"></div>IP tracking: OFF</button>
-            <button class="ct-btn" onclick="ctSendNotification()"><div class="ct-dot"></div>Request push notification</button>
-          </div>
+          <div class="f-col-title">Customer Policies</div>
+          <ul class="f-links">
+            <li><a>Contact Us</a></li>
+            <li><a>FAQ</a></li>
+            <li><a>T&amp;C</a></li>
+            <li><a>Track Orders</a></li>
+            <li><a>Cancellation</a></li>
+            <li><a>Return Policy</a></li>
+            <li><a>Privacy Policy</a></li>
+          </ul>
         </div>
-
+        <div>
+          <div class="f-col-title">Exclusive Access</div>
+          <ul class="f-links">
+            <li><a>Drip Insider</a></li>
+            <li><a>Insider Cards</a></li>
+            <li><a>Drip for Business</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="f-col-title">Quick Links</div>
+          <ul class="f-links">
+            <li><a>About Us</a></li>
+            <li><a>Careers</a></li>
+            <li><a>Press</a></li>
+            <li><a>Sustainability</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="f-col-title">Experience the App</div>
+          <ul class="f-links">
+            <li><a onclick="trackEvent('App Download Clicked',{platform:'iOS'})">🍎 App Store</a></li>
+            <li><a onclick="trackEvent('App Download Clicked',{platform:'Android'})">▶ Google Play</a></li>
+          </ul>
+        </div>
       </div>
-
-      <div class="ct-console">
-        <div class="ct-console-lbl">● Live Console</div>
-        <div id="ct-log">Ready — waiting for events…</div>
-        <div id="ct-id-out"></div>
-      </div>
-    </div>
-  </div>
-
-</div><!-- end .page -->
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div>
-        <div class="f-col-title">Online Shopping</div>
-        <ul class="f-links"><li><a>Men</a></li><li><a>Women</a></li><li><a>Kids</a></li><li><a>Home & Living</a></li><li><a>Beauty</a></li></ul>
-      </div>
-      <div>
-        <div class="f-col-title">Customer Policies</div>
-        <ul class="f-links"><li><a>Contact Us</a></li><li><a>FAQ</a></li><li><a>T&amp;C</a></li><li><a>Track Orders</a></li><li><a>Cancellation</a></li><li><a>Return Policy</a></li><li><a>Privacy Policy</a></li></ul>
-      </div>
-      <div>
-        <div class="f-col-title">Exclusive Access</div>
-        <ul class="f-links"><li><a>Drip Insider</a></li><li><a>Insider Cards</a></li><li><a>Drip for Business</a></li></ul>
-      </div>
-      <div>
-        <div class="f-col-title">Quick Links</div>
-        <ul class="f-links"><li><a>About Us</a></li><li><a>Careers</a></li><li><a>Press</a></li><li><a>Sustainability</a></li></ul>
-      </div>
-      <div>
-        <div class="f-col-title">Experience the App</div>
-        <ul class="f-links"><li><a onclick="trackEvent('App Download Clicked',{platform:'iOS'})">🍎 App Store</a></li><li><a onclick="trackEvent('App Download Clicked',{platform:'Android'})">▶ Google Play</a></li></ul>
+      <div class="footer-btm">
+        <div class="footer-copy">© 2025 Drip Fashion Pvt. Ltd. — CleverTap Demo Site</div>
+        <div class="footer-copy">📘 🐦 📸</div>
       </div>
     </div>
-    <div class="footer-btm">
-      <div class="footer-copy">© 2025 Drip Fashion Pvt. Ltd. — CleverTap Demo Site</div>
-      <div class="footer-copy">📘 🐦 📸</div>
-    </div>
-  </div>
-</footer>
+  </footer>
 
-<div class="toast-wrap" id="toast-wrap"></div>
-<div id="nativeDisplayContainer"></div>
+  <div class="toast-wrap" id="toast-wrap"></div>
+  <div id="nativeDisplayContainer"></div>
 
-<script>
-// PRODUCTS DATA
-const PRODS = [
-  {brand:'H&M', desc:'Regular Fit T-Shirt', now:'₹499', was:'₹999', off:'50% off', rating:'4.3', cnt:'12.4K', emoji:'👕', bg:'#f0f4f8'},
-  {brand:"Levi's", desc:'512 Slim Taper Jeans', now:'₹2,499', was:'₹4,999', off:'50% off', rating:'4.5', cnt:'8.2K', emoji:'👖', bg:'#e8f0fe'},
-  {brand:'Puma', desc:'Cell Viper Sneakers', now:'₹3,299', was:'₹5,999', off:'45% off', rating:'4.6', cnt:'5.7K', emoji:'👟', bg:'#e8fef0'},
-  {brand:'Zara', desc:'Floral Wrap Dress', now:'₹1,999', was:'₹3,599', off:'44% off', rating:'4.4', cnt:'3.1K', emoji:'👗', bg:'#fef0f8'},
-  {brand:'Nike', desc:'Air Max Pulse', now:'₹8,995', was:'₹12,000', off:'25% off', rating:'4.7', cnt:'22.1K', emoji:'👟', bg:'#fff8e8'},
-  {brand:'Fabindia', desc:'Cotton Kurta Set', now:'₹1,590', was:'₹2,990', off:'47% off', rating:'4.2', cnt:'4.8K', emoji:'🥻', bg:'#feeee8'},
-  {brand:'W', desc:'Block Print Kurti', now:'₹899', was:'₹1,799', off:'50% off', rating:'4.1', cnt:'2.3K', emoji:'👘', bg:'#f5e8fe'},
-  {brand:'Fossil', desc:'Gen 6 Smartwatch', now:'₹12,995', was:'₹22,995', off:'43% off', rating:'4.5', cnt:'9.6K', emoji:'⌚', bg:'#e8f8fe'},
-];
+  <script>
+    // PRODUCTS DATA
+    const PRODS = [
+      { brand: 'H&M', desc: 'Regular Fit T-Shirt', now: '₹499', was: '₹999', off: '50% off', rating: '4.3', cnt: '12.4K', emoji: '👕', bg: '#f0f4f8' },
+      { brand: "Levi's", desc: '512 Slim Taper Jeans', now: '₹2,499', was: '₹4,999', off: '50% off', rating: '4.5', cnt: '8.2K', emoji: '👖', bg: '#e8f0fe' },
+      { brand: 'Puma', desc: 'Cell Viper Sneakers', now: '₹3,299', was: '₹5,999', off: '45% off', rating: '4.6', cnt: '5.7K', emoji: '👟', bg: '#e8fef0' },
+      { brand: 'Zara', desc: 'Floral Wrap Dress', now: '₹1,999', was: '₹3,599', off: '44% off', rating: '4.4', cnt: '3.1K', emoji: '👗', bg: '#fef0f8' },
+      { brand: 'Nike', desc: 'Air Max Pulse', now: '₹8,995', was: '₹12,000', off: '25% off', rating: '4.7', cnt: '22.1K', emoji: '👟', bg: '#fff8e8' },
+      { brand: 'Fabindia', desc: 'Cotton Kurta Set', now: '₹1,590', was: '₹2,990', off: '47% off', rating: '4.2', cnt: '4.8K', emoji: '🥻', bg: '#feeee8' },
+      { brand: 'W', desc: 'Block Print Kurti', now: '₹899', was: '₹1,799', off: '50% off', rating: '4.1', cnt: '2.3K', emoji: '👘', bg: '#f5e8fe' },
+      { brand: 'Fossil', desc: 'Gen 6 Smartwatch', now: '₹12,995', was: '₹22,995', off: '43% off', rating: '4.5', cnt: '9.6K', emoji: '⌚', bg: '#e8f8fe' },
+    ];
 
-function productHTML(p) {
-  return `<div class="product-card" onclick="trackProductView('${p.brand}','${p.desc}','${p.now}')">
+    function productHTML(p) {
+      return `<div class="product-card" onclick="trackProductView('${p.brand}','${p.desc}','${p.now}')">
     <div class="prod-img" style="background:${p.bg}">
       <div class="prod-emoji">${p.emoji}</div>
       <div class="wish-btn" onclick="event.stopPropagation();trackWishlist('${p.brand}')">♡</div>
@@ -867,101 +1847,249 @@ function productHTML(p) {
       </div>
     </div>
   </div>`;
-}
+    }
 
-function fillStrip(id, arr) {
-  document.getElementById(id).innerHTML = arr.map(productHTML).join('');
-}
-fillStrip('strip-trending', PRODS);
-fillStrip('strip-top', [...PRODS].reverse());
-fillStrip('strip-new', PRODS.slice(0,6));
+    function fillStrip(id, arr) {
+      document.getElementById(id).innerHTML = arr.map(productHTML).join('');
+    }
+    fillStrip('strip-trending', PRODS);
+    fillStrip('strip-top', [...PRODS].reverse());
+    fillStrip('strip-new', PRODS.slice(0, 6));
 
-// SLIDER
-let slide = 0;
-const total = 3;
-const dotsEl = document.getElementById('slider-dots');
-for (let i = 0; i < total; i++) {
-  const d = document.createElement('div');
-  d.className = 'dot' + (i===0?' active':'');
-  d.onclick = () => goTo(i);
-  dotsEl.appendChild(d);
-}
-function goTo(n) {
-  slide = (n + total) % total;
-  document.getElementById('slides-track').style.transform = `translateX(-${slide*100}%)`;
-  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===slide));
-}
-function changeSlide(d) { goTo(slide + d); }
-setInterval(() => changeSlide(1), 5000);
+    // SLIDER
+    let slide = 0;
+    const total = 3;
+    const dotsEl = document.getElementById('slider-dots');
+    for (let i = 0; i < total; i++) {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.onclick = () => goTo(i);
+      dotsEl.appendChild(d);
+    }
+    function goTo(n) {
+      slide = (n + total) % total;
+      document.getElementById('slides-track').style.transform = `translateX(-${slide * 100}%)`;
+      document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === slide));
+    }
+    function changeSlide(d) { goTo(slide + d); }
+    setInterval(() => changeSlide(1), 5000);
 
-// NAV TAB
-function setTab(el, name) {
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  trackEvent('Nav Tab Clicked', {tab: name});
-}
+    // NAV TAB
+    function setTab(el, name) {
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      trackEvent('Nav Tab Clicked', { tab: name });
+    }
 
-// SEARCH
-document.getElementById('search-input').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && this.value.trim()) trackEvent('Search Performed', {query: this.value.trim()});
-});
+    // SEARCH
+    document.getElementById('search-input').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && this.value.trim()) trackEvent('Search Performed', { query: this.value.trim() });
+    });
 
-// TOAST
-function showToast(msg, pink) {
-  const wrap = document.getElementById('toast-wrap');
-  const t = document.createElement('div');
-  t.className = 'toast';
-  t.innerHTML = `<div class="t-dot${pink?' pink':''}"></div>${msg}`;
-  wrap.appendChild(t);
-  setTimeout(() => { t.style.opacity='0'; t.style.transition='opacity 0.3s'; setTimeout(()=>t.remove(),300); }, 2800);
-}
+    // TOAST
+    function showToast(msg, pink) {
+      const wrap = document.getElementById('toast-wrap');
+      const t = document.createElement('div');
+      t.className = 'toast';
+      t.innerHTML = `<div class="t-dot${pink ? ' pink' : ''}"></div>${msg}`;
+      wrap.appendChild(t);
+      setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity 0.3s'; setTimeout(() => t.remove(), 300); }, 2800);
+    }
 
-// CT LOG
-function ctLog(msg) {
-  const el = document.getElementById('ct-log');
-  const time = new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-  el.innerHTML = `[${time}] ${msg}\n` + el.innerHTML;
-}
+    // CT LOG
+    function ctLog(msg) {
+      const el = document.getElementById('ct-log');
+      const time = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      el.innerHTML = `[${time}] ${msg}\n` + el.innerHTML;
+    }
 
-// COMMERCE TRACKING
-function trackEvent(name, props) {
-  try { clevertap.event.push(name, props || {}); } catch(e){}
-  showToast(`CT: <b>${name}</b>`);
-  ctLog(`Event → ${name}${props?' | '+JSON.stringify(props):''}`);
-}
-function trackProductView(brand, desc, price) {
-  try { clevertap.event.push('ProductViewed', {Brand:brand, Product:desc, Price:price}); } catch(e){}
-  showToast(`Viewed: ${brand}`, true);
-  ctLog(`ProductViewed → ${brand} | ${desc} | ${price}`);
-}
-function trackWishlist(brand) {
-  try { clevertap.event.push('WishlistAdded', {Brand:brand}); } catch(e){}
-  showToast(`Wishlist: ${brand}`, true);
-  ctLog(`WishlistAdded → ${brand}`);
-}
+    // COMMERCE TRACKING
+    function trackEvent(name, props) {
+      try { clevertap.event.push(name, props || {}); } catch (e) { }
+      showToast(`CT: <b>${name}</b>`);
+      ctLog(`Event → ${name}${props ? ' | ' + JSON.stringify(props) : ''}`);
+    }
+    function trackProductView(brand, desc, price) {
+      try { clevertap.event.push('ProductViewed', { Brand: brand, Product: desc, Price: price }); } catch (e) { }
+      showToast(`Viewed: ${brand}`, true);
+      ctLog(`ProductViewed → ${brand} | ${desc} | ${price}`);
+    }
+    function trackWishlist(brand) {
+      try { clevertap.event.push('WishlistAdded', { Brand: brand }); } catch (e) { }
+      showToast(`Wishlist: ${brand}`, true);
+      ctLog(`WishlistAdded → ${brand}`);
+    }
 
-// CT LAB
-function ctPushEvent() { try{clevertap.event.push('ProductViewed');}catch(e){} ctLog('Pushed: ProductViewed'); showToast('CT: ProductViewed',true); }
-function ctWebpopup() { try{clevertap.event.push('web popup event');}catch(e){} ctLog('Pushed: web popup event'); showToast('CT: web popup event'); }
-function ctBoxWebpopup() { try{clevertap.event.push('box web popup event');}catch(e){} ctLog('Pushed: box web popup event'); showToast('CT: box web popup event'); }
-function ctCustomBoxWebpopup() { try{clevertap.event.push('custom box web popup event');}catch(e){} ctLog('Pushed: custom box web popup event'); showToast('CT: custom box web popup'); }
-function ctCustomSurvey() { try{clevertap.event.push('custom survey info web popup event');}catch(e){} ctLog('Pushed: custom survey info web popup event'); showToast('CT: custom html info popup'); }
-function ctWebNativeDisplay() { try{clevertap.event.push('web native trigger');}catch(e){} ctLog('Pushed: web native trigger'); showToast('CT: web native display'); }
-function ctOnUserLogin() {
-  try { clevertap.onUserLogin.push({"Site":{"Name":"Aayush web","Identity":123456,"Email":"aayushweb@yopmail.com","Gender":"M","DOB":new Date(),"MSG-email":true,"MSG-push":true,"MSG-sms":true,"MSG-whatsapp":true}}); } catch(e){}
-  ctLog('onUserLogin → Identity: 123456 | aayushweb@yopmail.com');
-  showToast('CT: User login — Aayush Web', true);
-}
-function ctProfilePush() { try{clevertap.profile.push({"Site":{"Name":"Aayush web","Email":"aayushweb@yopmail.com"}});}catch(e){} ctLog('Profile pushed → aayushweb@yopmail.com'); showToast('CT: Profile data sent'); }
-function ctShowId() { let id='—'; try{id=clevertap.getCleverTapID()||'—';}catch(e){} document.getElementById('ct-id-out').textContent=id!=='—'?'CT ID: '+id:''; ctLog('CleverTap ID: '+id); showToast('CT ID: '+id,true); }
-function ctClear() { try{clevertap.clear();}catch(e){} document.getElementById('ct-id-out').textContent=''; ctLog('Session cleared'); showToast('CT: Session cleared'); }
-function ctIPTrue() { try{clevertap.privacy.push({useIP:true});clevertap.event.push('useIP: true ');}catch(e){} ctLog('IP Tracking: ON'); showToast('CT: IP tracking ON',true); }
-function ctIPFalse() { try{clevertap.privacy.push({useIP:false});clevertap.event.push('useIP: false ');}catch(e){} ctLog('IP Tracking: OFF'); showToast('CT: IP tracking OFF'); }
-function ctSendNotification() {
-  try { clevertap.notifications.push({titleText:'Would you like to receive Notifications?',bodyText:"We'll send you only trusted updates.",okButtonText:'Allow',rejectButtonText:'Not now',okButtonColor:'#ff3f6c'}); } catch(e){}
-  ctLog('Push notification prompt triggered');
-  showToast('CT: Push permission prompt shown');
-}
-</script>
+    // CT LAB
+    function ctPushEvent() { try { clevertap.event.push('ProductViewed'); } catch (e) { } ctLog('Pushed: ProductViewed'); showToast('CT: ProductViewed', true); }
+    function ctWebpopup() { try { clevertap.event.push('web popup event'); } catch (e) { } ctLog('Pushed: web popup event'); showToast('CT: web popup event'); }
+    function ctBoxWebpopup() { try { clevertap.event.push('box web popup event'); } catch (e) { } ctLog('Pushed: box web popup event'); showToast('CT: box web popup event'); }
+    function ctCustomBoxWebpopup() { try { clevertap.event.push('custom box web popup event'); } catch (e) { } ctLog('Pushed: custom box web popup event'); showToast('CT: custom box web popup'); }
+    function ctCustomSurvey() { try { clevertap.event.push('custom survey info web popup event'); } catch (e) { } ctLog('Pushed: custom survey info web popup event'); showToast('CT: custom html info popup'); }
+    function ctWebNativeDisplay() { try { clevertap.event.push('web native trigger'); } catch (e) { } ctLog('Pushed: web native trigger'); showToast('CT: web native display'); }
+    function ctOnUserLogin() {
+      try { clevertap.onUserLogin.push({ "Site": { "Name": "Aayush web", "Identity": 123456, "Email": "aayushweb@yopmail.com", "Gender": "M", "DOB": new Date(), "MSG-email": true, "MSG-push": true, "MSG-sms": true, "MSG-whatsapp": true } }); } catch (e) { }
+      ctLog('onUserLogin → Identity: 123456 | aayushweb@yopmail.com');
+      showToast('CT: User login — Aayush Web', true);
+    }
+    function ctProfilePush() { try { clevertap.profile.push({ "Site": { "Name": "Aayush web", "Email": "aayushweb@yopmail.com" } }); } catch (e) { } ctLog('Profile pushed → aayushweb@yopmail.com'); showToast('CT: Profile data sent'); }
+    function ctShowId() { let id = '—'; try { id = clevertap.getCleverTapID() || '—'; } catch (e) { } document.getElementById('ct-id-out').textContent = id !== '—' ? 'CT ID: ' + id : ''; ctLog('CleverTap ID: ' + id); showToast('CT ID: ' + id, true); }
+    function ctClear() { try { clevertap.clear(); } catch (e) { } document.getElementById('ct-id-out').textContent = ''; ctLog('Session cleared'); showToast('CT: Session cleared'); }
+    function ctIPTrue() { try { clevertap.privacy.push({ useIP: true }); clevertap.event.push('useIP: true '); } catch (e) { } ctLog('IP Tracking: ON'); showToast('CT: IP tracking ON', true); }
+    function ctIPFalse() { try { clevertap.privacy.push({ useIP: false }); clevertap.event.push('useIP: false '); } catch (e) { } ctLog('IP Tracking: OFF'); showToast('CT: IP tracking OFF'); }
+    function ctSendNotification() {
+      try { clevertap.notifications.push({ titleText: 'Would you like to receive Notifications?', bodyText: "We'll send you only trusted updates.", okButtonText: 'Allow', rejectButtonText: 'Not now', okButtonColor: '#ff3f6c' }); } catch (e) { }
+      ctLog('Push notification prompt triggered');
+      showToast('CT: Push permission prompt shown');
+    }
+
+    function applyTileOrdering(value) {
+      try {
+        let data = typeof value === "string" ? JSON.parse(value) : value;
+
+        // Reorder inside offer-grid
+        const offerGrid = document.querySelector(".offer-grid");
+        if (offerGrid) {
+          const offerTiles = Array.from(offerGrid.querySelectorAll("[data-tile-key]"));
+          offerTiles
+            .filter(tile => data[tile.dataset.tileKey] !== undefined)
+            .sort((a, b) => Number(data[a.dataset.tileKey]) - Number(data[b.dataset.tileKey]))
+            .forEach(tile => offerGrid.appendChild(tile));
+        }
+
+        // Reorder inside gender-grid
+        const genderGrid = document.querySelector(".gender-grid");
+        if (genderGrid) {
+          const genderTiles = Array.from(genderGrid.querySelectorAll("[data-tile-key]"));
+          genderTiles
+            .filter(tile => data[tile.dataset.tileKey] !== undefined)
+            .sort((a, b) => Number(data[a.dataset.tileKey]) - Number(data[b.dataset.tileKey]))
+            .forEach(tile => genderGrid.appendChild(tile));
+        }
+
+        console.log("Tile ordering applied:", data);
+      } catch (e) {
+        console.error("Tile ordering failed:", e);
+      }
+    }
+
+    function applyHomepageOrdering(value) {
+      try {
+        let data = value;
+
+        if (typeof data === "string") {
+          data = JSON.parse(data);
+        }
+
+        const container = document.getElementById("dynamic-sections");
+
+        const sectionMap = {
+          trending_now: document.getElementById("sec-trending"),
+          shop_your_style: document.getElementById("sec-style"),
+          top_picks_for_you: document.getElementById("sec-top-picks"),
+          top_brands: document.getElementById("sec-brands"),
+          new_arrivals: document.getElementById("sec-new")
+        };
+
+        const ordered = Object.keys(data)
+          .filter(key => sectionMap[key])
+          .map(key => ({
+            node: sectionMap[key],
+            order: Number(data[key])
+          }))
+          .sort((a, b) => a.order - b.order);
+
+        ordered.forEach(item => {
+          container.appendChild(item.node);
+        });
+
+        console.log("Sections reordered successfully");
+
+      } catch (e) {
+        console.error("Ordering failed:", e);
+      }
+    }
+
+    // function productExperiences() {
+    //   var myObject = {
+    //     "trending_now": 0,
+    //     "shop_your_style": 1,
+    //     "top_picks_for_you": 2,
+    //     "top_brands": 3,
+    //     "new_arrivals": 4
+    //   };
+
+    //   const var1 = clevertap.defineVariable("web_home_ordering", JSON.stringify(myObject))
+
+    //   clevertap.fetchVariables(
+    //     // Success callback function  
+    //     () => { console.log('Fetch successful'); },
+    //   );
+
+    //   const valueChangedCallback = (changedVariable) => {
+    //     console.log(`Value changed for variable '${changedVariable.name}'`);
+    //     // Add your callback logic here  
+    //   };
+
+    //   // Add the callback to the variable using addValueChangedCallback method  
+    //   var1.addValueChangedCallback(valueChangedCallback);
+    // }
+
+    /* Replace your current productExperiences() function with this */
+
+    function productExperiences() {
+      try {
+        console.log("Starting Product Experiences...");
+
+        const defaultOrder = {
+          trending_now: 0,
+          shop_your_style: 1,
+          top_picks_for_you: 2,
+          top_brands: 3,
+          new_arrivals: 4
+        };
+
+        const tileOrderDefault = {
+          top_brands: 0,
+          new_arrivals: 1,
+          free_delivery: 2,
+          women: 0,
+          men: 1
+        };
+
+        const tileVar = clevertap.defineVariable(
+          "gender_offer_ordering",
+          JSON.stringify(tileOrderDefault)
+        );
+
+        // create variable
+        const homepageVar = clevertap.defineVariable(
+          "web_home_ordering",
+          JSON.stringify(defaultOrder)
+        );
+
+        // fetch latest values from dashboard
+        clevertap.fetchVariables(() => {
+          console.log("Variables fetched");
+
+          applyHomepageOrdering(homepageVar.getValue());
+          applyTileOrdering(tileVar.getValue());
+
+        });
+
+        // listen for live changes
+        homepageVar.addValueChangedCallback(function () {
+          console.log("Variable changed");
+
+          applyHomepageOrdering(homepageVar.getValue());
+          applyTileOrdering(tileVar.getValue());
+        });
+
+      } catch (err) {
+        console.error("Product Experiences Error:", err);
+      }
+    }
+  </script>
 </body>
+
 </html>
